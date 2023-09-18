@@ -1,4 +1,4 @@
-package uy.com.curso.pizzahurt.entities;
+package uy.com.curso.pizzahurt.enums;
 
 public enum TipoIngrediente {
     MASA, SALSA, QUESO, TOPINS

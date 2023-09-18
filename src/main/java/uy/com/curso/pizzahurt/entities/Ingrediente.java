@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import uy.com.curso.pizzahurt.entities.common.AbstractEntity;
+import uy.com.curso.pizzahurt.enums.TipoIngrediente;
 
 @Entity
 @Data

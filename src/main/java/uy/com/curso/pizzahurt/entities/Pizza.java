@@ -16,7 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Pizza extends AbstractEntity {
 
-    private String nombre;
+    private String	nombre;
+    private Integer	precio;
 
     @ManyToMany
     private List<Ingrediente> ingredientes = new LinkedList<>();

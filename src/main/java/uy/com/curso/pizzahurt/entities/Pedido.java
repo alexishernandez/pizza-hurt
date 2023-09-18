@@ -22,12 +22,17 @@ public class Pedido extends AbstractEntity {
     private Usuario usuario;
 
     //Lugar de entrega
-    private String nombreReceptor;
-    private String ciudad;
-    private String barrio;
-    private String direccion;
+    private String	nombreReceptor;
+    private String	ciudad;
+    private String	barrio;
+    private Integer codigoPostal;
+    private String	calle;
+    private Integer	nroPuerta;
+    private String	apto;
+    private String	observaciones;
 
     //Medio de Pago
+    private String emisor;
     private String nroTarjeta;
     private String fechaVencimiento;
     private String codigoCVV;
