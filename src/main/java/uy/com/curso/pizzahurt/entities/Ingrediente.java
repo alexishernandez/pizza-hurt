@@ -17,7 +17,7 @@ import uy.com.curso.pizzahurt.enums.TipoIngrediente;
 public class Ingrediente extends AbstractEntity {
 
     @NotNull
-    @Size(min=5, max=20, message="El nombre de la pizza debe tener como mínimo {min} y máximo {max} caracteres")
+    @Size(min=5, max=20, message="El nombre del ingrediente debe tener como mínimo {min} y máximo {max} caracteres")
     private String nombre;
 
     @Enumerated(EnumType.STRING)

@@ -25,7 +25,7 @@ public class PizzaHurtApplication {
             ingredienteRepository.save(new Ingrediente("Sin Gluten", TipoIngrediente.MASA));
 
             // Tipo de Salsas
-            ingredienteRepository.save(new Ingrediente("Salsa de Tomate Común", TipoIngrediente.SALSA));
+            ingredienteRepository.save(new Ingrediente("Salsa de Tomate", TipoIngrediente.SALSA));
             ingredienteRepository.save(new Ingrediente("Salsa Alfredo", TipoIngrediente.SALSA));
             ingredienteRepository.save(new Ingrediente("Salsa Pesto", TipoIngrediente.SALSA));
             ingredienteRepository.save(new Ingrediente("Salsa BBQ", TipoIngrediente.SALSA));
@@ -35,14 +35,14 @@ public class PizzaHurtApplication {
             ingredienteRepository.save(new Ingrediente("Dambo", TipoIngrediente.QUESO));
             ingredienteRepository.save(new Ingrediente("Cuatro Quesos", TipoIngrediente.QUESO));
             ingredienteRepository.save(new Ingrediente("Chedar", TipoIngrediente.QUESO));
-            ingredienteRepository.save(new Ingrediente("Azul", TipoIngrediente.QUESO));
+            ingredienteRepository.save(new Ingrediente("Queso Azul", TipoIngrediente.QUESO));
 
             // Tipo de Topins
-            ingredienteRepository.save(new Ingrediente("Panceta", TipoIngrediente.TOPINS));
-            ingredienteRepository.save(new Ingrediente("Aceituna", TipoIngrediente.TOPINS));
-            ingredienteRepository.save(new Ingrediente("Anchoas", TipoIngrediente.TOPINS));
-            ingredienteRepository.save(new Ingrediente("Ananá", TipoIngrediente.TOPINS));
-            ingredienteRepository.save(new Ingrediente("Palmitos", TipoIngrediente.TOPINS));
+            ingredienteRepository.save(new Ingrediente("Panceta", TipoIngrediente.TOPPINGS));
+            ingredienteRepository.save(new Ingrediente("Aceituna", TipoIngrediente.TOPPINGS));
+            ingredienteRepository.save(new Ingrediente("Anchoas", TipoIngrediente.TOPPINGS));
+            ingredienteRepository.save(new Ingrediente("Ananá", TipoIngrediente.TOPPINGS));
+            ingredienteRepository.save(new Ingrediente("Palmitos", TipoIngrediente.TOPPINGS));
 
         });
     }
