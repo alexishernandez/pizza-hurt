@@ -25,9 +25,9 @@ public class UsuarioController {
         Optional<Usuario> usuario = usuarioService.find(id);
         if (usuario.isPresent()){
             model.addAttribute("usuario",usuario.get());
-            return "showUsuario";
+            return "editUsuario";
         }else{
-            return "index";
+            return "editUsuario";
             }
     }
 

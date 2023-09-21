@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Perfil de Usuario</h1>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Datos del Usuario
+                </div>
+                <div class="card-body">
+                    <form th:object="${usuario}" th:action="@{/guardar}">
+                        <div class="form-group">
+                            <label>Nombre Completo:</label>
+                            <input type="text" class="form-control" th:field="*{nombreCompleto}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="email" class="form-control" th:field="*{email}">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono:</label>
+                            <input type="text" class="form-control" th:field="*{telefono}">
+                        </div>
+                        <div class="form-group">
+                            <label>Activo:</label>
+                            <input type="checkbox" class="form-check-input" th:field="*{activo}">
+                        </div>
+                        <div class="form-group">
+                            <label>Ciudad:</label>
+                            <input type="text" class="form-control" th:field="*{ciudad}">
+                        </div>
+                        <div class="form-group">
+                            <label>Barrio:</label>
+                            <input type="text" class="form-control" th:field="*{barrio}">
+                        </div>
+                        <div class="form-group">
+                            <label>Dirección:</label>
+                            <input type="text" class="form-control" th:field="*{direccion}">
+                        </div>
+                        <div class="form-group">
+                            <label>Número de Tarjeta:</label>
+                            <input type="text" class="form-control" th:field="*{nroTarjeta}">
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha de Vencimiento:</label>
+                            <input type="text" class="form-control" th:field="*{fechaVencimiento}">
+                        </div>
+                        <div class="form-group">
+                            <label>Código CVV:</label>
+                            <input type="text" class="form-control" th:field="*{codigoCVV}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
