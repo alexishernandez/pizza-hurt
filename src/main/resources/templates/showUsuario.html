@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Perfil de Usuario</h1>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Datos del Usuario
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Nombre Completo:</label>
+                        <span th:text="${usuario.nombreCompleto}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <span th:text="${usuario.email}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono:</label>
+                        <span th:text="${usuario.telefono}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Activo:</label>
+                        <span th:text="${usuario.activo ? 'Sí' : 'No'}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Ciudad:</label>
+                        <span th:text="${usuario.ciudad}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Barrio:</label>
+                        <span th:text="${usuario.barrio}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección:</label>
+                        <span th:text="${usuario.direccion}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Número de Tarjeta:</label>
+                        <span th:text="${usuario.nroTarjeta}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de Vencimiento:</label>
+                        <span th:text="${usuario.fechaVencimiento}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Código CVV:</label>
+                        <span th:text="${usuario.codigoCVV}"></span>
+                    </div>
+                    <!-- Puedes agregar más campos del usuario aquí -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

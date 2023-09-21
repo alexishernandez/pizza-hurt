@@ -1,5 +1,6 @@
-package uy.com.curso.pizzahurt.entities;
+package uy.com.curso.pizzahurt.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
@@ -8,7 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uy.com.curso.pizzahurt.entities.common.AbstractEntity;
+import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 
 @Entity
 @Data
@@ -21,6 +22,7 @@ public class Usuario extends AbstractEntity {
     private String nombreCompleto;
 
     @Email
+    @Column(unique = true)
     private String email;
 
     private String telefono;

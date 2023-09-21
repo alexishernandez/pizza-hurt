@@ -1,4 +1,4 @@
-package uy.com.curso.pizzahurt.entities;
+package uy.com.curso.pizzahurt.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uy.com.curso.pizzahurt.entities.common.AbstractEntity;
+import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 
 import java.util.ArrayList;
 import java.util.List;

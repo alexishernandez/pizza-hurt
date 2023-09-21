@@ -1,4 +1,4 @@
-package uy.com.curso.pizzahurt.entities;
+package uy.com.curso.pizzahurt.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,12 +8,14 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import uy.com.curso.pizzahurt.entities.common.AbstractEntity;
+import lombok.NoArgsConstructor;
+import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 import uy.com.curso.pizzahurt.enums.TipoIngrediente;
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Ingrediente extends AbstractEntity {
 
     @NotNull
