@@ -1,9 +1,8 @@
 package uy.com.curso.pizzahurt.repositories;
 
-import org.springframework.data.repository.CrudRepository;
-import uy.com.curso.pizzahurt.entities.Ingrediente;
+import org.springframework.data.jpa.repository.JpaRepository;
+import uy.com.curso.pizzahurt.models.Ingrediente;
 
-public interface IngredienteRepository extends CrudRepository<Ingrediente,Long> {
-
+public interface IngredienteRepository extends JpaRepository<Ingrediente,Long> {
 
 }

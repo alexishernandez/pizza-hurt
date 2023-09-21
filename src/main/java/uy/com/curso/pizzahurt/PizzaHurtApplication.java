@@ -4,9 +4,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import uy.com.curso.pizzahurt.entities.Ingrediente;
+import uy.com.curso.pizzahurt.models.Ingrediente;
 import uy.com.curso.pizzahurt.enums.TipoIngrediente;
+import uy.com.curso.pizzahurt.models.Usuario;
 import uy.com.curso.pizzahurt.repositories.IngredienteRepository;
+import uy.com.curso.pizzahurt.repositories.UsuarioRepository;
 
 @SpringBootApplication
 public class PizzaHurtApplication {
@@ -16,7 +18,7 @@ public class PizzaHurtApplication {
     }
 
     @Bean
-    CommandLineRunner dataLoader(IngredienteRepository ingredienteRepository) {
+    CommandLineRunner dataLoaderIngrediente(IngredienteRepository ingredienteRepository) {
         return (args -> {
             // Tipo de Masas
             ingredienteRepository.save(new Ingrediente("Masa Común", TipoIngrediente.MASA));
@@ -43,6 +45,16 @@ public class PizzaHurtApplication {
             ingredienteRepository.save(new Ingrediente("Anchoas", TipoIngrediente.TOPPINGS));
             ingredienteRepository.save(new Ingrediente("Ananá", TipoIngrediente.TOPPINGS));
             ingredienteRepository.save(new Ingrediente("Palmitos", TipoIngrediente.TOPPINGS));
+
+        });
+    }
+
+    @Bean
+    CommandLineRunner dataLoaderUsuario(UsuarioRepository usuarioRepository) {
+        return (args -> {
+            usuarioRepository.save(new Usuario("Jhon Doe","jhondoe@prueba.com","222-2222",
+                    "password",true,"Montevideo","Centro","Soriano 1297",
+                    "1241-12452-4545","05/24","212"));
 
         });
     }
