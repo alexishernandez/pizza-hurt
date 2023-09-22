@@ -8,7 +8,7 @@ public class PizzaController {
 	
 	 @GetMapping("/") 
 	 public String index() {
-		 return "index";
+		 return "inicio";
 	 }
 	 
 
