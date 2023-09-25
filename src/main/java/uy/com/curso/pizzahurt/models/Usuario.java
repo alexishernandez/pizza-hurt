@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import uy.com.curso.pizzahurt.models.common.AbstractEntity;
+import uy.com.curso.pizzahurt.validators.EmailUniqueConstraint;
 
 @Entity
 @Data
@@ -50,8 +51,6 @@ public class Usuario extends AbstractEntity {
     @NotBlank
     private  String nroPuerta;
 
-    @NotNull
-    @NotBlank
     private String apto;
 
     @NotNull

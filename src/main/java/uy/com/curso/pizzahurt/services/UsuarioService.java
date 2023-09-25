@@ -17,6 +17,7 @@ public class UsuarioService {
     }
 
     public Usuario createUsuario(Usuario usuario){
+        usuario.setActivo(true);
         usuario = usuarioRepository.save(usuario);
         return usuario;
     }
@@ -34,6 +35,10 @@ public class UsuarioService {
 
     public Usuario findByEmail( String email){
         return usuarioRepository.findUsuarioByEmail(email);
+    }
+
+    public Boolean existsUsuarioByEmail( String email){
+        return usuarioRepository.existsUsuarioByEmail(email);
     }
 
 
