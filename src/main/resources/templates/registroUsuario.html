@@ -3,60 +3,33 @@
 <head th:replace="~{fragments/head :: _head('Perfil del Usuario')}"></head>
 
 <body>
-<nav th:replace="~{fragments/navbar :: _nav}"></nav>
-
+<nav th:replace="~{fragments/navbar_external.html::_nav}"></nav>
 <div class="container mt-2">
     <div class="row">
         <div class="col-md-12">
+            <div class="d-flex justify-content-center">
+                <h1>Registro de Usuario</h1>
+            </div>
             <div class="card">
-                <div class="card-header">
-                    Datos del Usuario
-                </div>
                 <div class="card-body">
-                    <div th:if="${mensaje}" th:text="${mensaje}" th:class="${'alert alert-success'}"></div>
+                    <div th:if="${mensaje}" th:text="${mensaje}" th:class="${'alert alert-success'}"/>
 
-                    <form th:object="${usuario}" th:action="@{/usuario/guardar}" method="post">
+                    <form th:object="${usuario}" th:action="@{/usuario/registrarUsuario}" method="post"
+                          oninput='pwd2.setCustomValidity(pwd2.value != pwd.value ? "La contraseña no coincide." : "")'>
                         <div class="card w-95">
                             <div class="card-body">
                                 <h5 class="card-title">Datos Personales</h5>
                                 <div class="row align-items-center">
-                                    <div class="col">
+                                    <div class="col-6">
                                         <div class="form-group">
                                             <label>Nombre Completo:</label>
                                             <input type="text" class="form-control " th:field="*{nombreCompleto}"
                                                    th:classappend="${#fields.hasErrors('nombreCompleto')} ? 'is-invalid' : ''"
                                                    aria-describedby="validationNombre"/>
-                                            <div id="validationNombre" class="invalid-feedback">
+                                            <div id="valida tionNombre" class="invalid-feedback">
                                                 <p th:if="${#fields.hasErrors('nombreCompleto')}" th:errors="*{nombreCompleto}">Error ingredientes</p>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="col ">
-                                        <fieldset class="form-group">
-                                            <div class="row">
-                                                <legend class="col-form-label col-sm-4 pt-0">Usuario Activo: </legend>
-                                                <div class="col-sm-8">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="true" checked>
-                                                        <label class="form-check-label" for="gridRadios1">
-                                                            Si
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="false">
-                                                        <label class="form-check-label" for="gridRadios2">
-                                                            No
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <!--                                        <div class="form-group">-->
-<!--                                            <label>Activo:</label>-->
-<!--                                            <input type="checkbox" class="form-check-input" th:field="*{activo}">-->
-<!--                                        </div>-->
                                     </div>
                                 </div>
 
@@ -66,7 +39,7 @@
                                             <label>Email:</label>
                                             <input type="email" class="form-control" th:field="*{email}"
                                                    th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''"
-                                                   aria-describedby="validationEmail">
+                                                   aria-describedby="validationEmail" required>
                                             <div id="validationEmail" class="invalid-feedback">
                                                 <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</p>
                                             </div>
@@ -85,13 +58,30 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row align-items-center">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Contraseña:</label>
+                                            <div class="input-group" id="show_hide_password">
+                                                <input id="password" type="password" class="form-control" th:field="*{password}"
+                                                       th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''"
+                                                       aria-describedby="validationPassword" name="pwd" autocomplete="off" required >
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                                                </div>
+                                                <div id="validationPassword" class="invalid-feedback">
+                                                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="card w-95 mt-2">
                             <div class="card-body">
                                 <h5 class="card-title">Domicilio</h5>
-
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <div class="form-group">
@@ -139,6 +129,7 @@
                                                 <p th:if="${#fields.hasErrors('calle')}" th:errors="*{calle}">Error</p>
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="col-2">
                                         <div class="form-group">
@@ -151,6 +142,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="col-2">
                                         <div class="form-group">
                                             <label>Apto:</label>
@@ -217,12 +209,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col col-md-5 offset-md-5">
-                                        <button type="submit" class="btn btn-primary">Modificar Datos</button>
-                                        <button type="submit" class="btn btn-secondary">Activar Usuario</button>
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col col-md-5 offset-md-5">
+                                <button type="submit" class="btn btn-primary">Confirmar</button>
+                                <a href="#" class="btn btn-danger" role="button">Cancelar</a>
                             </div>
                         </div>
                     </form>
@@ -236,7 +228,7 @@
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{assets/password-strength-meter/password.min.js}"></script>
+<script th:src="@{/assets/password-strength-meter/password.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 
 </body>
