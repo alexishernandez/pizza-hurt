@@ -53,8 +53,8 @@ public class PizzaHurtApplication {
     CommandLineRunner dataLoaderUsuario(UsuarioRepository usuarioRepository) {
         return (args -> {
             usuarioRepository.save(new Usuario("Jhon Doe","jhondoe@prueba.com","222-2222",
-                    "password",true,"Montevideo","Centro","Soriano 1297",
-                    "1241-12452-4545","05/24","212"));
+                    "password",true,"Montevideo","Centro","Soriano","1287", "101","11600", "Visa","Juan Perez",
+                    "4242424242424242","05/24","212"));
 
         });
     }

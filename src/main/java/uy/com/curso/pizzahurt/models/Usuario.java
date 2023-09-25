@@ -2,13 +2,11 @@ package uy.com.curso.pizzahurt.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.CreditCardNumber;
 import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 
 @Entity
@@ -25,25 +23,54 @@ public class Usuario extends AbstractEntity {
     @Column(unique = true)
     private String email;
 
+    @NotNull
+    @NotBlank
     private String telefono;
 
     private String password;
 
+
     private Boolean activo;
 
+
     //domicilio del usuario
+    @NotNull
+    @NotBlank
     private String ciudad;
 
+    @NotNull
+    @NotBlank
     private String barrio;
 
-    private String direccion;
+    @NotNull
+    @NotBlank
+    private String calle;
+
+    @NotNull
+    @NotBlank
+    private  String nroPuerta;
+
+    @NotNull
+    @NotBlank
+    private String apto;
+
+    @NotNull
+    @NotBlank
+    private String codigoPostal;
 
     //Tarjeta del usuario
+
+    private String emisor;
+
+    private String nombreTarjeta;
+
+    @CreditCardNumber(message="El nro de tarjeta no es válido")
     private String nroTarjeta;
 
+    @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([2-9][0-9])$", message="Fecha inválida, el formato correcto es: MM/YY")
     private String fechaVencimiento;
 
-    @Digits(integer=3, fraction=0, message="Código CVV inválido")
+    @Pattern(regexp="^[0-9]{3}$", message="CódigoCVV invalido")
     private String codigoCVV;
 
 }

@@ -16,6 +16,8 @@
     <description>pizza-hurt</description>
     <properties>
         <java.version>17</java.version>
+        <webjars-locator.version>0.30</webjars-locator.version>
+        <font-awesome.version>5.11.2</font-awesome.version>
     </properties>
     <dependencies>
         <dependency>
@@ -74,6 +76,25 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>${webjars-locator.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>${font-awesome.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -36,9 +36,6 @@ public class Pedido extends AbstractEntity {
     private String	barrio;
 
     @NotNull
-    private Integer codigoPostal;
-
-    @NotNull
     private String	calle;
 
     @NotNull
@@ -46,6 +43,10 @@ public class Pedido extends AbstractEntity {
 
     @NotNull
     private String	apto;
+
+    @NotNull
+    private Integer codigoPostal;
+
 
     private String	observaciones;
 
