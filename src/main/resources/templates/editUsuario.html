@@ -15,10 +15,14 @@
                 </div>
                 <div class="card-body">
                     <form th:object="${usuario}" th:action="@{/guardar}">
-                        <div class="form-group">
-                            <label>Nombre Completo:</label>
-                            <input type="text" class="form-control" th:field="*{nombreCompleto}">
-                        </div>
+						
+						
+						<div th:replace="fragments/campoDTO.html :: formField(field='nombreCompleto', descripcion='Nombre Completo')"></div>
+						
+<!--                        <div class="form-group">-->
+<!--                            <label>Nombre Completo:</label>-->
+<!--                            <input type="text" class="form-control" th:field="*{nombreCompleto}">-->
+<!--                        </div>-->
 
                         <div class="form-group">
                             <label>Email:</label>
