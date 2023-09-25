@@ -22,7 +22,10 @@ public class PedidoController {
     }
     
     @GetMapping("/crear")
-    public String crearPedido() {
+    public String crearPedido(Model model) {
+    	
+    	model.addAttribute("pedido", new Pedido());
+    	
     	return ("editPedido");
     }
 

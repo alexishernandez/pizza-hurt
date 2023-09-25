@@ -6,22 +6,17 @@
 <nav th:replace="fragments/navbar :: _nav"></nav>
 
 <div class="container mt-5">
-    <h1>Pedido</h1>
+    <h1>Disena tu pizza:</h1>
     <div class="row mt-3">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header	">
-                    Datos de Entrega
+                    Datos de la pizza
                 </div>
                 <div class="card-body">
                     <form th:object="${pedido}" th:action="@{/guardar}">
 						
 						<div th:replace="fragments/campoDTO.html :: formField(field='nombreReceptor', descripcion='Nombre del Receptor')"/>
-						<div th:replace="fragments/campoDTO.html :: formField(field='barrio',		descripcion='Barrio')"/>
-						<div th:replace="fragments/campoDTO.html :: formField(field='calle',		descripcion='Calle')"/>
-						<div th:replace="fragments/campoDTO.html :: formField(field='nroPuerta',	descripcion='Numero de Puerta')"/>
-						<div th:replace="fragments/campoDTO.html :: formField(field='apto',			descripcion='Apartamento')"/>						
-						<div th:replace="fragments/campoDTO.html :: formField(field='observaciones',	descripcion='Observaciones')"/>
 						
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     </form>
