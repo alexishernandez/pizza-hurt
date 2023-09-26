@@ -39,6 +39,11 @@ public class IngredienteService {
     public List<Ingrediente> getAllToppings() {
     	return ingredienteRepository.findByTipoIngrediente(TipoIngrediente.TOPPINGS);
     }
+    
+    public Ingrediente findByNombre(String nombre) {
+    	return ingredienteRepository.findByNombre(nombre);
+    }
+        
 
 
     

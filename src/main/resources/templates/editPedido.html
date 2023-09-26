@@ -7,8 +7,27 @@
 
 <div class="container mt-5">
     <h1>Pedido</h1>
+    
+    
+    <ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+  </li>
+</ul>
+    
+    
+    
     <div class="row mt-3">
-        <div class="col-md-6">
+        <div class="col-md-6">	
             <div class="card">
                 <div class="card-header	">
                     Datos de Entrega
@@ -16,11 +35,11 @@
                 <div class="card-body">
                     <form th:object="${pedido}" th:action="@{/guardar}">
 						
-						<div th:replace="fragments/campoDTO.html :: formField(field='nombreReceptor', descripcion='Nombre del Receptor')"/>
-						<div th:replace="fragments/campoDTO.html :: formField(field='barrio',		descripcion='Barrio')"/>
-						<div th:replace="fragments/campoDTO.html :: formField(field='calle',		descripcion='Calle')"/>
-						<div th:replace="fragments/campoDTO.html :: formField(field='nroPuerta',	descripcion='Numero de Puerta')"/>
-						<div th:replace="fragments/campoDTO.html :: formField(field='apto',			descripcion='Apartamento')"/>						
+						<div th:replace="fragments/campoDTO.html :: formField(field='nombreReceptor',	descripcion='Nombre del Receptor')"/>
+						<div th:replace="fragments/campoDTO.html :: formField(field='barrio',			descripcion='Barrio')"/>
+						<div th:replace="fragments/campoDTO.html :: formField(field='calle',			descripcion='Calle')"/>
+						<div th:replace="fragments/campoDTO.html :: formField(field='nroPuerta',		descripcion='Numero de Puerta')"/>
+						<div th:replace="fragments/campoDTO.html :: formField(field='apto',				descripcion='Apartamento')"/>						
 						<div th:replace="fragments/campoDTO.html :: formField(field='observaciones',	descripcion='Observaciones')"/>
 						
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
@@ -35,10 +54,10 @@
                 </div>
                 <div class="card-body">
 					
-					<div th:replace="fragments/campoDTO.html :: formField(field='emisor',	descripcion='Emisor')"/>
-					<div th:replace="fragments/campoDTO.html :: formField(field='nroTarjeta',	descripcion='Numero de Tarjeta')"/>
+					<div th:replace="fragments/campoDTO.html :: formField(field='emisor',			descripcion='Emisor')"/>
+					<div th:replace="fragments/campoDTO.html :: formField(field='nroTarjeta',		descripcion='Numero de Tarjeta')"/>
 					<div th:replace="fragments/campoDTO.html :: formField(field='fechaVencimiento',	descripcion='Fecha de Vencimiento')"/>
-					<div th:replace="fragments/campoDTO.html :: formField(field='codigoCVV',	descripcion='CVV')"/>
+					<div th:replace="fragments/campoDTO.html :: formField(field='codigoCVV',		descripcion='CVV')"/>
 					
                 </div>
             </div>

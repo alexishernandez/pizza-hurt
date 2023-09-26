@@ -10,5 +10,6 @@ import uy.com.curso.pizzahurt.models.Ingrediente;
 public interface IngredienteRepository extends JpaRepository<Ingrediente,Long> {
 	
 	List<Ingrediente> findByTipoIngrediente(TipoIngrediente tipoIngrediente);
+	Ingrediente 	  findByNombre(String nombre);
 
 }

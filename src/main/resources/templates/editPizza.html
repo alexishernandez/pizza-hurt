@@ -37,23 +37,32 @@
 							<select id="selSalsas" class="form-control"
 								    th:field="*{salsas}" multiple>
 							  <option th:each="salsaPizza : ${allSalsas}" 
-							          th:value="22222222" 
+							          th:value="${salsaPizza.id}" 
 							          th:text="${salsaPizza.nombre}"></option>
 							</select>
-
 						</div>
 
 						
 						<div id="quesos">
-							<label for="selQuesos">Ponele tus Quesos:</label>
+							<label for="selQuesos">Cubrila de Quesos:</label>
 														
 							<select id="selQuesos" class="form-control"
 								    th:field="*{quesos}" multiple>
 							  <option th:each="quesosPizza : ${allQuesos}" 
-							          th:value="22222222" 
+							          th:value="${quesosPizza.id}" 
 							          th:text="${quesosPizza.nombre}"></option>
 							</select>
+						</div>
 
+						<div id="toppings">
+							<label for="selToppings">Ponele tus Toppings:</label>
+														
+							<select id="selToppings" class="form-control"
+								    th:field="*{toppings}" multiple>
+							  <option th:each="toppingsPizza : ${allToppings}" 
+							          th:value="${toppingsPizza.id}" 
+							          th:text="${toppingsPizza.nombre}"></option>
+							</select>
 						</div>
 						
 						
