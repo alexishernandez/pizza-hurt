@@ -22,8 +22,8 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/show")
-    public String showUsuario(Model model, @RequestParam(name="id") Long id) {
+    @GetMapping("/modificar")
+    public String modificarUsuario(Model model, @RequestParam(name="id") Long id) {
         Optional<Usuario> usuario = usuarioService.find(id);
         if (usuario.isPresent()){
             model.addAttribute("usuario",usuario.get());
@@ -50,12 +50,12 @@ public class UsuarioController {
         return "editUsuario";
     }
 
-    @GetMapping("/registrarUsuario")
-    public String showUsuario(Model model) {
-        Usuario usuario= new Usuario();
-        model.addAttribute("usuario",usuario);
-        return "registroUsuario";
-    }
+//    @GetMapping("/registrarUsuario")
+//    public String showUsuario(Model model) {
+//        Usuario usuario= new Usuario();
+//        model.addAttribute("usuario",usuario);
+//        return "registroUsuario";
+//    }
 
     @PostMapping("/registrarUsuario")
     public String agregarUsuario(@Valid Usuario usuario, Errors errores,Model model) {

@@ -30,9 +30,7 @@ public class Usuario extends AbstractEntity {
 
     private String password;
 
-
     private Boolean activo;
-
 
     //domicilio del usuario
     @NotNull

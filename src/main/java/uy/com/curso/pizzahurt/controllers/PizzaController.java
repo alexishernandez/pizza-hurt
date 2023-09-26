@@ -10,6 +10,5 @@ public class PizzaController {
 	 public String index() {
 		 return "inicio";
 	 }
-	 
 
 }
