@@ -35,6 +35,11 @@
                 </div>
                 <div class="card-body">
 					
+					<div th:replace="fragments/campoDTO.html :: formField(field='emisor',	descripcion='Emisor')"/>
+					<div th:replace="fragments/campoDTO.html :: formField(field='nroTarjeta',	descripcion='Numero de Tarjeta')"/>
+					<div th:replace="fragments/campoDTO.html :: formField(field='fechaVencimiento',	descripcion='Fecha de Vencimiento')"/>
+					<div th:replace="fragments/campoDTO.html :: formField(field='codigoCVV',	descripcion='CVV')"/>
+					
                 </div>
             </div>
 
