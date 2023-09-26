@@ -1,4 +1,4 @@
-$(".alert").delay(4000).slideUp(200, function() {
+$(".status_message").delay(4000).slideUp(200, function() {
     $(this).alert('close');
 });
 

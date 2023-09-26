@@ -29,6 +29,18 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
     }
 
+    @Transactional
+    public Usuario cambiarEstadoUsuario(Usuario usuario){
+        Usuario aux = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
+        if(aux != null) {
+            Boolean nuevoEstado= !aux.getActivo();
+            aux.setActivo(nuevoEstado);
+            usuario.setActivo(nuevoEstado);
+            usuarioRepository.save(aux);
+        }
+        return usuario;
+    }
+
     public Optional<Usuario> find(long id){
         return usuarioRepository.findById(id);
     }

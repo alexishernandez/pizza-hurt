@@ -27,9 +27,9 @@ public class UsuarioController {
         Optional<Usuario> usuario = usuarioService.find(id);
         if (usuario.isPresent()){
             model.addAttribute("usuario",usuario.get());
-            return "editUsuario";
+            return "modificarUsuario";
         }else{
-            return "editUsuario";
+            return "modificarUsuario";
             }
     }
 
@@ -37,42 +37,24 @@ public class UsuarioController {
     public String guardarUsuario(@Valid Usuario usuario, Errors errores, Model model) {
         log.info("Guardando usuario: " + usuario.toString());
         if (errores.hasErrors()) {
-            log.error("Se encontraror errores al validar: {}", errores.getAllErrors());
-            return "editUsuario";
+            log.error("Se encontraron errores al validar: {}", errores.getAllErrors());
+            return "modificarUsuario";
         }
-        if (usuarioService.existsUsuarioByEmail(usuario.getEmail())){
-            log.error("Email ya registrado...");
-            model.addAttribute("mensaje_error","Email ya registrado...");
-            return "editUsuario";
-        }
+
         usuarioService.updateUsuario(usuario);
         model.addAttribute("mensaje","Actualización exitosa...");
-        return "editUsuario";
+        return "modificarUsuario";
     }
 
-//    @GetMapping("/registrarUsuario")
-//    public String showUsuario(Model model) {
-//        Usuario usuario= new Usuario();
-//        model.addAttribute("usuario",usuario);
-//        return "registroUsuario";
-//    }
-
-    @PostMapping("/registrarUsuario")
-    public String agregarUsuario(@Valid Usuario usuario, Errors errores,Model model) {
-        model.addAttribute("usuario",usuario);
-        if (errores.hasErrors()) {
-            log.error("Se encontraror errores al validar: {}", errores.getAllErrors());
-            return "registroUsuario";
-        }
-        if (usuarioService.existsUsuarioByEmail(usuario.getEmail())){
-            log.error("Email ya registrado...");
-            model.addAttribute("mensaje_error","Email ya registrado...");
-            return "registroUsuario";
-        }
-        usuarioService.createUsuario(usuario);
-        model.addAttribute("mensaje","Usuario creado correctamente...");
-        return "registroUsuario";
-
+    @GetMapping("/cambiarPassword")
+    public String cambiarPassword(Model model) {
+//        Optional<Usuario> usuario = usuarioService.find(id);
+//        if (usuario.isPresent()){
+//            model.addAttribute("usuario",usuario.get());
+//            return "cambiarPassword";
+//        }else{
+            return "cambiarPassword";
+//        }
     }
 
 }
