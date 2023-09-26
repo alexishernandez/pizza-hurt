@@ -14,9 +14,50 @@
                     Datos de la pizza
                 </div>
                 <div class="card-body">
-                    <form th:object="${pedido}" th:action="@{/guardar}">
+                    <form th:object="${pizza}" th:action="@{/guardar}">
 						
-						<div th:replace="fragments/campoDTO.html :: formField(field='nombreReceptor', descripcion='Nombre del Receptor')"/>
+						
+						
+						<div id="masas">
+							<label>Eleji tu Masa:</label>
+							
+							
+							<select id="selMasa" class="form-control" th:field="*{masa}">
+							  <option th:each="masaPizza : ${allMasas}" 
+							          th:value="${masaPizza.nombre}" 
+							          th:text="${masaPizza.nombre}"></option>
+							</select>
+
+						</div>
+						
+						
+						<div id="salsas">
+							<label for="selSalsas">Eleji tus salsas:</label>
+													
+							<select id="selSalsas" class="form-control"
+								    th:field="*{salsas}" multiple>
+							  <option th:each="salsaPizza : ${allSalsas}" 
+							          th:value="22222222" 
+							          th:text="${salsaPizza.nombre}"></option>
+							</select>
+
+						</div>
+
+						
+						<div id="quesos">
+							<label for="selQuesos">Ponele tus Quesos:</label>
+														
+							<select id="selQuesos" class="form-control"
+								    th:field="*{quesos}" multiple>
+							  <option th:each="quesosPizza : ${allQuesos}" 
+							          th:value="22222222" 
+							          th:text="${quesosPizza.nombre}"></option>
+							</select>
+
+						</div>
+						
+						
+						
 						
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     </form>
