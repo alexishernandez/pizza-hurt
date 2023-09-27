@@ -1,94 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="fragments/head :: _head('Pedido')"></head>
 
 <body>
-<nav th:replace="fragments/navbar :: _nav"></nav>
+	<nav th:replace="fragments/navbar :: _nav"></nav>
 
-<div class="container mt-5">
-    <h1>Disena tu pizza:</h1>
-    <div class="row mt-3">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header	">
-                    Datos de la pizza
-                </div>
-                <div class="card-body">
-                    <form th:object="${pizza}" th:action="@{/guardar}">
-						
-						
-						
-						<div id="masas">
-							<label>Eleji tu Masa:</label>
-							
-							
-							<select id="selMasa" class="form-control" th:field="*{masa}">
-							  <option th:each="masaPizza : ${allMasas}" 
-							          th:value="${masaPizza.nombre}" 
-							          th:text="${masaPizza.nombre}"></option>
-							</select>
+	<div class="container mt-5">
+		<h1>Disena tu pizza:</h1>
+		<div class="row mt-3">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header	">
+						Datos de la pizza
+					</div>
+					<div class="card-body">
+						<form th:object="${pizza}" th:action="@{/guardar}">
 
-						</div>
-						
-						
-						<div id="salsas">
-							<label for="selSalsas">Eleji tus salsas:</label>
-													
-							<select id="selSalsas" class="form-control"
-								    th:field="*{salsas}" multiple>
-							  <option th:each="salsaPizza : ${allSalsas}" 
-							          th:value="${salsaPizza.id}" 
-							          th:text="${salsaPizza.nombre}"></option>
-							</select>
-						</div>
+							<div id="masas">
+								<label>Eleji tu Masa:</label>
 
-						
-						<div id="quesos">
-							<label for="selQuesos">Cubrila de Quesos:</label>
-														
-							<select id="selQuesos" class="form-control"
-								    th:field="*{quesos}" multiple>
-							  <option th:each="quesosPizza : ${allQuesos}" 
-							          th:value="${quesosPizza.id}" 
-							          th:text="${quesosPizza.nombre}"></option>
-							</select>
-						</div>
 
-						<div id="toppings">
-							<label for="selToppings">Ponele tus Toppings:</label>
-														
-							<select id="selToppings" class="form-control"
-								    th:field="*{toppings}" multiple>
-							  <option th:each="toppingsPizza : ${allToppings}" 
-							          th:value="${toppingsPizza.id}" 
-							          th:text="${toppingsPizza.nombre}"></option>
-							</select>
-						</div>
-						
-						
-						
-						
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                    </form>
-                </div>
-            </div>
-            
-            
-            <div class="card">
-                <div class="card-header	">
-                    Datos de Pago
-                </div>
-                <div class="card-body">
-					
-                </div>
-            </div>
+								<select id="selMasa" class="form-control" th:field="*{masa}">
+									<option th:each="masaPizza : ${allMasas}" th:value="${masaPizza.nombre}"
+										th:text="${masaPizza.nombre}"></option>
+								</select>
 
-            
-        </div>
-    </div>
-</div>
+							</div>
 
-<footer th:replace="fragments/footer:: _footer"></footer>
+
+							<div id="salsas">
+								<label for="selSalsas">Eleji tus salsas:</label>
+
+								<select id="selSalsas" class="form-control" th:field="*{salsas}" multiple>
+									<option th:each="salsaPizza : ${allSalsas}" th:value="${salsaPizza.id}"
+										th:text="${salsaPizza.nombre}"></option>
+								</select>
+							</div>
+
+
+							<div id="quesos">
+								<label for="selQuesos">Cubrila de Quesos:</label>
+
+								<select id="selQuesos" class="form-control" th:field="*{quesos}" multiple>
+									<option th:each="quesosPizza : ${allQuesos}" th:value="${quesosPizza.id}"
+										th:text="${quesosPizza.nombre}"></option>
+								</select>
+							</div>
+
+							<div id="toppings">
+								<label for="selToppings">Ponele tus Toppings:</label>
+
+								<select id="selToppings" class="form-control" th:field="*{toppings}" multiple>
+									<option th:each="toppingsPizza : ${allToppings}" th:value="${toppingsPizza.id}"
+										th:text="${toppingsPizza.nombre}"></option>
+								</select>
+							</div>
+
+							<button type="submit" class="btn btn-primary">Guardar Cambios</button>
+						</form>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="fragments/footer:: _footer"></footer>
 
 </body>
+
 </html>

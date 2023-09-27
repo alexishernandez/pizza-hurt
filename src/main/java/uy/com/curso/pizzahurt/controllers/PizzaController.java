@@ -4,12 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uy.com.curso.pizzahurt.dtos.CarritoDto;
 import uy.com.curso.pizzahurt.models.Pizza;
 import uy.com.curso.pizzahurt.services.IngredienteService;
 import uy.com.curso.pizzahurt.services.PizzaService;
@@ -19,10 +22,18 @@ import uy.com.curso.pizzahurt.services.PizzaService;
 @RequestMapping("/pizza")
 @Controller
 @RequiredArgsConstructor
+@SessionAttributes("carritoDto")
 public class PizzaController {
 	
 	public final IngredienteService ingredienteService;
 	public final PizzaService pizzaService;
+	
+	
+	@ModelAttribute("carrito")
+	public CarritoDto carrito() {
+	    return new CarritoDto();
+	}
+	
 	
 	 @GetMapping("/crear") 
 	 public String crearPizza(Model model) {
@@ -38,16 +49,16 @@ public class PizzaController {
 	 }
 	 
 	 @PostMapping("/crear") 
-	 public String grabarPizza(@Valid Pizza pizza, Errors errores, Model model) {
+	 public String guardarPizza(@Valid Pizza pizza, @ModelAttribute("carrito") CarritoDto carrito, Errors errores, Model model) {
 
         if (errores.hasErrors()) {
             log.error("Se encontraron errores al validar la pizza: {}", errores.getAllErrors());
-            return "modificarPizza";
+            return "editPizza";
         } else  {
-        	pizzaService.updatePizza(pizza);        	
-
-	        model.addAttribute("mensaje","Actualización exitosa...");
-	        return "modificarPizza";
+        	
+        	carrito.add(pizza);
+        	
+	        return "editPizza";
 
         }
 
