@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: _head('Pizza Hurt')"></head>
+<head th:replace="~{fragments/head :: _head('Pizza Hurt')}"></head>
 
 <body>
-<nav th:replace="fragments/navbar :: _nav"></nav>
+  <nav th:replace="~{fragments/navbar :: _nav}"></nav>
 
-<div class="container mt-5">
-  <img id="image_logo" th:src="@{/images/pizzahurt.png}" class="img-fluid rounded mx-auto d-block" alt="">
-</div>
+  <div class="container mt-5">
+    <img id="image_logo" th:src="@{/images/pizzahurt.png}" class="img-fluid rounded mx-auto d-block" alt="">
+  </div>
 
-<footer th:replace="fragments/footer:: _footer"></footer>
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <footer th:replace="~{fragments/footer:: _footer}"></footer>
 </body>
 </html>

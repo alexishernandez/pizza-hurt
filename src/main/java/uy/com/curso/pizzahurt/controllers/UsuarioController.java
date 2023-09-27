@@ -12,7 +12,7 @@ import uy.com.curso.pizzahurt.services.UsuarioService;
 import java.util.Optional;
 
 @Slf4j
-@RequestMapping("/usuario")
+@RequestMapping("protected/usuario")
 @Controller
 public class UsuarioController {
 

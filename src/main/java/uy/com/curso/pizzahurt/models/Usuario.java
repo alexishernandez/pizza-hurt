@@ -7,14 +7,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.CreditCardNumber;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 import uy.com.curso.pizzahurt.validators.EmailUniqueConstraint;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario extends AbstractEntity {
+public class Usuario extends AbstractEntity implements UserDetails {
 
     @NotNull
     @Size(min=3, max=20, message="El nombre debe tener como mínimo {min} y máximo {max} caracteres")
@@ -59,4 +65,33 @@ public class Usuario extends AbstractEntity {
     @Pattern(regexp="^[0-9]{3}$", message="CódigoCVV invalido")
     private String codigoCVV;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.asList(new SimpleGrantedAuthority("Usuario"));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

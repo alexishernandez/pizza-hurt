@@ -1,9 +1,12 @@
 package uy.com.curso.pizzahurt;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import uy.com.curso.pizzahurt.models.Ingrediente;
 import uy.com.curso.pizzahurt.enums.TipoIngrediente;
 import uy.com.curso.pizzahurt.models.Usuario;
@@ -12,6 +15,13 @@ import uy.com.curso.pizzahurt.repositories.UsuarioRepository;
 
 @SpringBootApplication
 public class PizzaHurtApplication {
+
+    @Bean
+    public BCryptPasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
 
     public static void main(String[] args) {
         SpringApplication.run(PizzaHurtApplication.class, args);
@@ -53,7 +63,7 @@ public class PizzaHurtApplication {
     CommandLineRunner dataLoaderUsuario(UsuarioRepository usuarioRepository) {
         return (args -> {
             usuarioRepository.save(new Usuario("Jhon Doe","jhondoe@prueba.com","222-2222",
-                    "password",true,"Montevideo","Centro","Soriano","1287","101",
+                    encoder().encode("password"),true,"Montevideo","Centro","Soriano","1287","101",
                     "11600","Casi en la esquina", "Visa","Juan Perez",
                     "4242424242424242","05/24","212"));
 

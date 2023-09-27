@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import uy.com.curso.pizzahurt.models.Pedido;
 import uy.com.curso.pizzahurt.services.PedidoService;
 
-@RequestMapping("/pedido")
+@RequestMapping("/protected/pedido")
 @Controller
 public class PedidoController {
 

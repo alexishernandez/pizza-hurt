@@ -21,34 +21,7 @@ public class AppController {
     }
 
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
 
-    @GetMapping("/registrarUsuario")
-    public String showUsuario(Model model) {
-        Usuario usuario= new Usuario();
-        model.addAttribute("usuario",usuario);
-        return "registroUsuario";
-    }
-
-    @PostMapping("/registrarUsuario")
-    public String agregarUsuario(@Valid Usuario usuario, Errors errores, Model model) {
-        model.addAttribute("usuario",usuario);
-        if (errores.hasErrors()) {
-            log.error("Se encontraron errores al validar: {}", errores.getAllErrors());
-            return "registroUsuario";
-        }
-        if (usuarioService.existsUsuarioByEmail(usuario.getEmail())){
-            log.error("Error: El e-mail ya se encuentra registrado...");
-            model.addAttribute("mensaje_error","Error: El e-mail ya se encuentra registrado...");
-            return "registroUsuario";
-        }
-        usuarioService.createUsuario(usuario);
-        model.addAttribute("mensaje","Usuario creado correctamente...");
-        return "registroUsuario";
-    }
 
     @GetMapping("/")
     public String home(Model model) {

@@ -19,7 +19,7 @@ import uy.com.curso.pizzahurt.services.PizzaService;
 
 
 @Slf4j
-@RequestMapping("/pizza")
+@RequestMapping("/protected/pizza")
 @Controller
 @RequiredArgsConstructor
 @SessionAttributes("carritoDto")
