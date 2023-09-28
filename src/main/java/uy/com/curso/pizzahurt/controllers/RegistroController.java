@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import uy.com.curso.pizzahurt.dtos.RegistroDto;
 import uy.com.curso.pizzahurt.models.Usuario;
 import uy.com.curso.pizzahurt.services.UsuarioService;
 
@@ -32,24 +33,24 @@ public class RegistroController {
 
     @GetMapping("/registrarUsuario")
     public String showUsuario(Model model) {
-        Usuario usuario= new Usuario();
-        model.addAttribute("usuario",usuario);
+        RegistroDto registro= new RegistroDto();
+        model.addAttribute("registro",registro);
         return "registroUsuario";
     }
 
     @PostMapping("/registrarUsuario")
-    public String agregarUsuario(@Valid Usuario usuario, Errors errores, Model model) {
-        model.addAttribute("usuario",usuario);
+    public String agregarUsuario(@Valid RegistroDto registro, Errors errores, Model model) {
+        model.addAttribute("registro",registro);
         if (errores.hasErrors()) {
             log.error("Se encontraron errores al validar: {}", errores.getAllErrors());
             return "registroUsuario";
         }
-        if (usuarioService.existsUsuarioByEmail(usuario.getEmail())){
+        if (usuarioService.existsUsuarioByEmail(registro.getEmail())){
             log.error("Error: El e-mail ya se encuentra registrado...");
             model.addAttribute("mensaje_error","Error: El e-mail ya se encuentra registrado...");
             return "registroUsuario";
         }
-        usuarioService.createUsuario(usuario);
+        usuarioService.createUsuarioByRegistroDto(registro);
         model.addAttribute("mensaje","Usuario creado correctamente...");
         return "registroUsuario";
     }

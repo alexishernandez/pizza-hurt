@@ -24,6 +24,10 @@ body > .container {
     background-color: #fff3eb;
 }
 
+.input-password{
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
 #image_logo{
     max-width: 60%;
 }

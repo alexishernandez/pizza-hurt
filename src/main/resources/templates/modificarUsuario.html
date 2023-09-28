@@ -16,7 +16,7 @@
                     <div th:if="${mensaje}" th:text="${mensaje}" th:class="${'status_message alert alert-success'}"></div>
                     <div th:if="${mensaje_error}" th:text="${mensaje_error}" th:class="${'status_message alert alert-danger'}"/>
 
-                    <form th:object="${usuario}" th:action="@{/usuario/guardar}" method="post">
+                    <form th:object="${usuario}" th:action="@{/protected/usuario/guardar}" method="post">
                         <div class="card w-95">
                             <div class="card-body">
                                 <h5 class="card-title">Datos Personales</h5>

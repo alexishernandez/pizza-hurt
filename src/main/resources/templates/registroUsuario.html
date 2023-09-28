@@ -15,7 +15,7 @@
                     <div th:if="${mensaje}" th:text="${mensaje}" th:class="${'alert alert-success'}"/>
                     <div th:if="${mensaje_error}" th:text="${mensaje_error}" th:class="${'alert alert-danger'}"/>
 
-                    <form th:object="${usuario}" th:action="@{/registrarUsuario}" method="post">
+                    <form th:object="${registro}" th:action="@{/registrarUsuario}" method="post">
                         <div class="card w-95">
                             <div class="card-body">
                                 <h5 class="card-title">Datos Personales</h5>
@@ -66,8 +66,8 @@
                                                 <input id="password" type="password" class="form-control" th:field="*{password}"
                                                        th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''"
                                                        aria-describedby="validationPassword" name="pwd" autocomplete="off" required >
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                                                <div class=" input-group-lg">
+                                                    <span class="input-group-text input-password"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                                                 </div>
                                                 <div id="validationPassword" class="invalid-feedback">
                                                     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</p>

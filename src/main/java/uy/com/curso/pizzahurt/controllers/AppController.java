@@ -23,8 +23,6 @@ public class AppController {
     }
 
 
-
-
     @GetMapping("/")
     public String home(Model model) {
         Usuario usuario= new Usuario();
