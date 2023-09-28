@@ -55,7 +55,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" th:href="@{/pedido/crear}">
+          <a class="nav-link active" th:href="@{/protected/pizza/crear}">
             <i class="fas fa-plus-circle"></i> Agregar Pizza a mi Pedido
             <span class="sr-only">(current)</span>
           </a>
@@ -65,8 +65,15 @@
           <a class="nav-link" href="#"> Mis Pedidos <span class="sr-only">(current)</span></a>
         </li>
       </ul>
+      
+
 
       <ul class="navbar-nav ml-auto ms-auto">
+		  
+		<a class="nav-link active" th:href="@{/protected/pizza/crear}">
+     		<i class="fa-solid fa-cart-shopping"></i>
+		</a>		  
+		  
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
              Bienvenido juan perez
