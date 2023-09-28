@@ -20,6 +20,11 @@ public class RegistroController {
         this.usuarioService = usuarioService;
     }
 
+    @GetMapping("/")
+    public String index() {
+        return "login";
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";

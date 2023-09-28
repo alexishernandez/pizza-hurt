@@ -2,6 +2,7 @@ package uy.com.curso.pizzahurt.controllers;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -23,14 +24,9 @@ public class UsuarioController {
     }
 
     @GetMapping("/modificar")
-    public String modificarUsuario(Model model, @RequestParam(name="id") Long id) {
-        Optional<Usuario> usuario = usuarioService.find(id);
-        if (usuario.isPresent()){
-            model.addAttribute("usuario",usuario.get());
-            return "modificarUsuario";
-        }else{
-            return "modificarUsuario";
-            }
+    public String modificarUsuario(Model model, @AuthenticationPrincipal Usuario usuario) {
+        model.addAttribute("usuario",usuario);
+        return "modificarUsuario";
     }
 
     @PostMapping("/guardar")
@@ -56,5 +52,4 @@ public class UsuarioController {
             return "cambiarPassword";
 //        }
     }
-
 }

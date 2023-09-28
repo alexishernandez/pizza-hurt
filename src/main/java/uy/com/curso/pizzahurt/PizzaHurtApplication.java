@@ -16,11 +16,8 @@ import uy.com.curso.pizzahurt.repositories.UsuarioRepository;
 @SpringBootApplication
 public class PizzaHurtApplication {
 
-    @Bean
-    public BCryptPasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
-
+    @Autowired
+    PasswordEncoder encoder;
 
 
     public static void main(String[] args) {
@@ -62,8 +59,14 @@ public class PizzaHurtApplication {
     @Bean
     CommandLineRunner dataLoaderUsuario(UsuarioRepository usuarioRepository) {
         return (args -> {
+
             usuarioRepository.save(new Usuario("Jhon Doe","jhondoe@prueba.com","222-2222",
-                    encoder().encode("password"),true,"Montevideo","Centro","Soriano","1287","101",
+                    encoder.encode("password"),true,"Montevideo","Centro","Soriano","1287","101",
+                    "11600","Casi en la esquina", "Visa","Juan Perez",
+                    "4242424242424242","05/24","212"));
+
+            usuarioRepository.save(new Usuario("Jane Doe","janedoe@prueba.com","222-2222",
+                    encoder.encode("password1"),true,"Montevideo","Centro","18 de Julio","1287","101",
                     "11600","Casi en la esquina", "Visa","Juan Perez",
                     "4242424242424242","05/24","212"));
 
