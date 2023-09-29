@@ -13,10 +13,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Target(TYPE)
 @Retention(RUNTIME)
-@Constraint(validatedBy = DomicilioValidator.class)
-public @interface DomicilioConstraint {
+@Constraint(validatedBy = TarjetaValidator.class)
+public @interface TarjetaConstraint {
 
-    String message() default "Error en Domicilio: Faltan datos o no están completos";
+    String message() default "Error en Tarjeta: Faltan datos o no están completos";
 
     Class<?>[] groups() default {};
 

@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 import uy.com.curso.pizzahurt.validators.DomicilioConstraint;
 import uy.com.curso.pizzahurt.validators.EmailUniqueConstraint;
+import uy.com.curso.pizzahurt.validators.TarjetaConstraint;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,6 +23,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @DomicilioConstraint
+@TarjetaConstraint
 public class Usuario extends AbstractEntity implements UserDetails {
 
     @NotNull
