@@ -13,10 +13,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Target(TYPE)
 @Retention(RUNTIME)
-@Constraint(validatedBy = { DomicilioValidator.class })
+@Constraint(validatedBy = DomicilioValidator.class)
 public @interface DomicilioConstraint {
 
-    String message() default "{com.example.validation.ValidAddress.message}";
+    String message() default "Faltan datos en el domicilio o no son correctos";
 
     Class<?>[] groups() default {};
 

@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uy.com.curso.pizzahurt.models.common.AbstractEntity;
+import uy.com.curso.pizzahurt.validators.DomicilioConstraint;
 import uy.com.curso.pizzahurt.validators.EmailUniqueConstraint;
 
 import java.util.Arrays;
@@ -20,6 +21,7 @@ import java.util.Collection;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@DomicilioConstraint
 public class Usuario extends AbstractEntity implements UserDetails {
 
     @NotNull

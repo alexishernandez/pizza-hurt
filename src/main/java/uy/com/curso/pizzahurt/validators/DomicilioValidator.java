@@ -3,21 +3,34 @@ package uy.com.curso.pizzahurt.validators;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import uy.com.curso.pizzahurt.dtos.DomicilioDto;
+import uy.com.curso.pizzahurt.dtos.UsuarioDto;
+import uy.com.curso.pizzahurt.models.Usuario;
 
-public class DomicilioValidator  implements ConstraintValidator<DomicilioConstraint, DomicilioDto> {
+public class DomicilioValidator  implements ConstraintValidator<DomicilioConstraint, Usuario> {
     @Override
     public void initialize(DomicilioConstraint constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
-    public boolean isValid(DomicilioDto domicilio, ConstraintValidatorContext context) {
-        if (domicilio.getCiudad() == null ^ domicilio.getBarrio() == null ^ domicilio.getCalle()== null ^
-                domicilio.getNroPuerta()== null ^ domicilio.getApto()== null ^ domicilio.getCodigoPostal() == null ^
-                domicilio.getObservaciones()== null) {
-            return false;
-        } else {
+    public boolean isValid(Usuario domicilio, ConstraintValidatorContext context) {
+        boolean isEmptyDomicilioBase=(domicilio.getCiudad() == null || domicilio.getCiudad().isEmpty()) &&
+                (domicilio.getBarrio() == null || domicilio.getBarrio().isEmpty()) &&
+                (domicilio.getCalle()  == null || domicilio.getCalle().isEmpty()) &&
+                (domicilio.getNroPuerta()== null ||domicilio.getNroPuerta().isEmpty()) &&
+                (domicilio.getCodigoPostal() == null || domicilio.getCodigoPostal().isEmpty());
+        boolean isFullDomicilioBase= (domicilio.getCiudad() != null && !domicilio.getCiudad().isEmpty()) &&
+                (domicilio.getBarrio() != null && !domicilio.getBarrio().isEmpty()) &&
+                (domicilio.getCalle()  != null && !domicilio.getCalle().isEmpty()) &&
+                (domicilio.getNroPuerta() != null && !domicilio.getNroPuerta().isEmpty()) &&
+                (domicilio.getCodigoPostal() != null && !domicilio.getCodigoPostal().isEmpty());
+
+        boolean isEmptyApto = (domicilio.getApto() == null || domicilio.getApto().isEmpty());
+        boolean isEmptyObservaciones = (domicilio.getObservaciones() == null || domicilio.getObservaciones().isEmpty());
+
+        if (isFullDomicilioBase || (isEmptyDomicilioBase && isEmptyApto && isEmptyObservaciones)){
             return true;
-        }
+        } else
+         return false;
     }
 }

@@ -2,18 +2,26 @@ package uy.com.curso.pizzahurt.dtos;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.CreditCardNumber;
+import uy.com.curso.pizzahurt.validators.DomicilioConstraint;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@DomicilioConstraint
 public class UsuarioDto {
+
     @NotNull
     @Size(min=3, max=20, message="El nombre debe tener como mínimo {min} y máximo {max} caracteres")
     private String nombreCompleto;
 
     @Email
+    @Column(unique = true)
     private String email;
 
-    @NotNull
-    @NotBlank
     private String telefono;
 
     private String password;
@@ -21,27 +29,19 @@ public class UsuarioDto {
     private Boolean activo;
 
     //domicilio del usuario
-    @NotNull
-    @NotBlank
     private String ciudad;
 
-    @NotNull
-    @NotBlank
     private String barrio;
 
-    @NotNull
-    @NotBlank
     private String calle;
 
-    @NotNull
-    @NotBlank
     private  String nroPuerta;
 
     private String apto;
 
-    @NotNull
-    @NotBlank
     private String codigoPostal;
+
+    private String observaciones;
 
     //Tarjeta del usuario
     private String emisor;
