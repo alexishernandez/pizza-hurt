@@ -1,5 +1,7 @@
 package uy.com.curso.pizzahurt.controllers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,6 +15,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uy.com.curso.pizzahurt.dtos.CarritoDto;
+import uy.com.curso.pizzahurt.models.Ingrediente;
 import uy.com.curso.pizzahurt.models.Pizza;
 import uy.com.curso.pizzahurt.services.IngredienteService;
 import uy.com.curso.pizzahurt.services.PizzaService;
@@ -22,28 +25,51 @@ import uy.com.curso.pizzahurt.services.PizzaService;
 @RequestMapping("/protected/pizza")
 @Controller
 @RequiredArgsConstructor
-@SessionAttributes("carritoDto")
+@SessionAttributes("carrito")
 public class PizzaController {
 	
 	public final IngredienteService ingredienteService;
 	public final PizzaService pizzaService;
 	
-	
+
+	// - - - Model Attributes - - - 
+		
 	@ModelAttribute("carrito")
 	public CarritoDto carrito() {
 	    return new CarritoDto();
 	}
 	
 	
+	@ModelAttribute("allMasas")
+	public List<Ingrediente> allMasas() {
+	    return ingredienteService.getAllMasas() ;
+	}
+	
+	@ModelAttribute("allSalsas")
+	public List<Ingrediente> allSalsas() {
+	    return ingredienteService.getAllSalsas() ;
+	}
+
+	@ModelAttribute("allQuesos")
+	public List<Ingrediente> allQuesos() {
+	    return ingredienteService.getAllQuesos() ;
+	}
+
+	@ModelAttribute("allToppings")
+	public List<Ingrediente> allToppings() {
+	    return ingredienteService.getAllToppings() ;
+	}
+
+	
+
+	
+	// - - - 
+	
 	 @GetMapping("/crear") 
 	 public String crearPizza(Model model) {
 		 
 		 
 		 model.addAttribute("pizza", new Pizza());
-		 model.addAttribute("allMasas", ingredienteService.getAllMasas() );
-		 model.addAttribute("allSalsas", ingredienteService.getAllSalsas() );
-		 model.addAttribute("allQuesos", ingredienteService.getAllQuesos() );
-		 model.addAttribute("allToppings", ingredienteService.getAllToppings() );
 		 
 		 return "editPizza";
 	 }
@@ -55,7 +81,9 @@ public class PizzaController {
             log.error("Se encontraron errores al validar la pizza: {}", errores.getAllErrors());
             return "editPizza";
         } else  {
-        	
+
+        	System.out.println("----------------------");
+        	System.out.println(pizza);
         	carrito.add(pizza);
         	
 	        return "editPizza";
