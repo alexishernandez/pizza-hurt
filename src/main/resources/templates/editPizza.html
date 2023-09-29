@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/head :: _head('Pedido')"></head>
+<head th:replace="~{fragments/head :: _head('Pedido')}"></head>
 
 <body>
-	<nav th:replace="fragments/navbar :: _nav"></nav>
+	<nav th:replace="~{fragments/navbar}"></nav>
 
 	<div class="container mt-5">
 		<h1>Disena tu pizza:</h1>
@@ -15,7 +15,9 @@
 						Datos de la pizza
 					</div>
 					<div class="card-body">
-						<form th:object="${pizza}" th:action="@{/protected/pizza/crear}">
+						<form th:object="${pizza}" th:action="@{/protected/pizza/crear}" method="post">
+
+							<div th:replace="~{fragments/campoDTO.html (field='nombre',	descripcion='Nombra tu Pizza')}"/>
 
 							<div id="masas">
 								<label>Eleji tu Masa:</label>
@@ -67,7 +69,7 @@
 		</div>
 	</div>
 
-	<footer th:replace="fragments/footer:: _footer"></footer>
+	<footer th:replace="~{fragments/footer:: _footer}"></footer>
 
 </body>
 
