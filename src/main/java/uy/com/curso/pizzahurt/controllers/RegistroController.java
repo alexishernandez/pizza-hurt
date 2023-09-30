@@ -33,24 +33,24 @@ public class RegistroController {
 
     @GetMapping("/registrarUsuario")
     public String showUsuario(Model model) {
-        RegistroDto registro= new RegistroDto();
-        model.addAttribute("registro",registro);
+        RegistroDto registroDto= new RegistroDto();
+        model.addAttribute("registroDto",registroDto);
         return "registroUsuario";
     }
 
     @PostMapping("/registrarUsuario")
-    public String agregarUsuario(@Valid RegistroDto registro, Errors errores, Model model) {
-        model.addAttribute("registro",registro);
+    public String agregarUsuario(@Valid RegistroDto registroDto, Errors errores, Model model) {
+        model.addAttribute("registroDto",registroDto);
         if (errores.hasErrors()) {
             log.error("Se encontraron errores al validar: {}", errores.getAllErrors());
             return "registroUsuario";
         }
-        if (usuarioService.existsUsuarioByEmail(registro.getEmail())){
+        if (usuarioService.existsUsuarioByEmail(registroDto.getEmail())){
             log.error("Error: El e-mail ya se encuentra registrado...");
             model.addAttribute("mensaje_error","Error: El e-mail ya se encuentra registrado...");
             return "registroUsuario";
         }
-        usuarioService.createUsuarioByRegistroDto(registro);
+        usuarioService.createUsuarioByRegistroDto(registroDto);
         model.addAttribute("mensaje","Usuario creado correctamente...");
         return "registroUsuario";
     }

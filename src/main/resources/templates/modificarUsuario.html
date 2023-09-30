@@ -37,12 +37,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <div class="form-group">
-                                            <label>Usuario Activo: </label>
+                                            <label for="flexSwitchCheckChecked">Usuario Activo: </label>
                                             <div class="form-check form-switch form-switch-lg">
                                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" th:field="*{activo}">
-                                                <label class="form-check-label" for="flexSwitchCheckChecked">Activar/Desactivar Usuario</label>
                                             </div>
 
                                             <!--                                            <input th:field="*{activo}" hidden>-->
@@ -232,6 +231,7 @@
                                 <div class="row mt-2">
                                     <div class="col col-md-5 offset-md-5">
                                         <button type="submit" class="btn btn-primary">Modificar Datos</button>
+                                        <a th:href="@{/protected/home}"  class="btn btn-secondary" role="button">Volver</a>
                                     </div>
                                 </div>
                             </div>

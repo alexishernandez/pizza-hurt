@@ -9,8 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import uy.com.curso.pizzahurt.dtos.UsuarioPasswordDto;
 import uy.com.curso.pizzahurt.models.Usuario;
-import uy.com.curso.pizzahurt.services.DomicilioService;
 import uy.com.curso.pizzahurt.services.UsuarioService;
 
 import java.util.Optional;
@@ -21,11 +21,9 @@ import java.util.Optional;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
-    private final DomicilioService domicilioService;
 
-    public UsuarioController(UsuarioService usuarioService, DomicilioService domicilioService) {
+    public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
-        this.domicilioService = domicilioService;
     }
 
     @GetMapping("/modificar")
@@ -43,20 +41,36 @@ public class UsuarioController {
             log.error("Se encontraron errores al validar: {}", result.getAllErrors());
             return "modificarUsuario";
         }
-
         usuarioService.updateUsuario(usuario);
         model.addAttribute("mensaje","Actualización exitosa...");
         return "modificarUsuario";
     }
 
     @GetMapping("/cambiarPassword")
-    public String cambiarPassword(Model model) {
-//        Optional<Usuario> usuario = usuarioService.find(id);
-//        if (usuario.isPresent()){
-//            model.addAttribute("usuario",usuario.get());
-//            return "cambiarPassword";
-//        }else{
+    public String cambiarPassword(Model model, @AuthenticationPrincipal Usuario usuario) {
+        UsuarioPasswordDto usuarioPasswordDto = new UsuarioPasswordDto();
+        usuarioPasswordDto.setEmail(usuario.getEmail());
+        model.addAttribute("usuarioPasswordDto", usuarioPasswordDto);
+        return "cambiarPassword";
+    }
+
+    @PostMapping("/cambiarPassword")
+    public String guardarPassword(@ModelAttribute("usuarioPasswordDto") @Valid UsuarioPasswordDto usuarioPasswordDto,
+                 BindingResult result,Model model,@AuthenticationPrincipal Usuario usuario) {
+
+        if (result.hasErrors()) {
+            log.error("Se han encontraron errores al validar: {}", result.getAllErrors());
             return "cambiarPassword";
-//        }
+        }
+        Usuario usuarioAux = usuarioService.findByEmail(usuario.getEmail());
+        if (usuarioService.comparePasswordWithUserPassword(usuarioPasswordDto.getPasswordActual(),usuarioAux)){
+            usuarioService.cambiarPasswordUsuario(usuarioPasswordDto.getPasswordNueva(),usuarioAux);
+            model.addAttribute("success","La contraseña se cambió exitosamente");
+            return "cambiarPassword";
+
+        } else{
+            log.error("Se han encontraron errores en la contraseña actual...");
+            result.rejectValue("passwordActual", "","Contraseña incorrecta");
+            return "cambiarPassword";}
     }
 }

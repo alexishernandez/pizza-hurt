@@ -140,6 +140,7 @@ body > .container {
 .form-switch.form-switch-lg {
     padding-left: 8.5em;
     height: 4.5em;
+    margin-bottom: -2rem;
 }
 
 .form-switch.form-switch-lg .form-check-input {

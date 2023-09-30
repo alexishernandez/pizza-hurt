@@ -19,20 +19,58 @@ $('#password').password({
     minimumLength: 4 // minimum password length (below this threshold, the score is 0)
 });
 
-var input = $("#show_hide_password input");
-var icon = $("#show_hide_password i");
+var input_password = $("#show_password input");
+var icon_password  = $("#show_password i");
 
-icon.on('click', function (event) {
+var input_confirmar_password = $("#show_confirm_password input");
+var icon_confirmar_password  = $("#show_confirm_password i");
+
+var input_actual_password = $("#show_actual_password input");
+var icon_actual_password  = $("#show_actual_password i");
+
+icon_actual_password.on('click', function (event) {
     event.preventDefault();
 
-    if (input.attr("type") === "text") {
-        input.attr('type', 'password');
-        icon.addClass("fa-eye-slash");
-        icon.removeClass("fa-eye");
+    if (input_actual_password.attr("type") === "text") {
+        input_actual_password.attr('type', 'password');
+        icon_actual_password.addClass("fa-eye-slash");
+        icon_actual_password.removeClass("fa-eye");
 
-    } else if (input.attr("type") === "password") {
-        input.attr('type', 'text');
-        icon.removeClass("fa-eye-slash");
-        icon.addClass("fa-eye");
+    } else if (input_actual_password.attr("type") === "password") {
+        input_actual_password.attr('type', 'text');
+        icon_actual_password.removeClass("fa-eye-slash");
+        icon_actual_password.addClass("fa-eye");
+    }
+});
+
+
+icon_confirmar_password.on('click', function (event) {
+    event.preventDefault();
+
+    if (input_confirmar_password.attr("type") === "text") {
+        input_confirmar_password.attr('type', 'password');
+        icon_confirmar_password.addClass("fa-eye-slash");
+        icon_confirmar_password.removeClass("fa-eye");
+
+    } else if (input_confirmar_password.attr("type") === "password") {
+        input_confirmar_password.attr('type', 'text');
+        icon_confirmar_password.removeClass("fa-eye-slash");
+        icon_confirmar_password.addClass("fa-eye");
+    }
+});
+
+
+icon_password.on('click', function (event) {
+    event.preventDefault();
+
+    if (input_password.attr("type") === "text") {
+        input_password.attr('type', 'password');
+        icon_password.addClass("fa-eye-slash");
+        icon_password.removeClass("fa-eye");
+
+    } else if (input_password.attr("type") === "password") {
+        input_password.attr('type', 'text');
+        icon_password.removeClass("fa-eye-slash");
+        icon_password.addClass("fa-eye");
     }
 });
