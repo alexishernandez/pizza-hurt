@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +16,15 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uy.com.curso.pizzahurt.dtos.CarritoDto;
+import uy.com.curso.pizzahurt.dtos.PedidoDto;
+import uy.com.curso.pizzahurt.helpers.AppHelper;
 import uy.com.curso.pizzahurt.models.Pedido;
 import uy.com.curso.pizzahurt.models.Pizza;
+import uy.com.curso.pizzahurt.models.Usuario;
 import uy.com.curso.pizzahurt.services.IngredienteService;
 import uy.com.curso.pizzahurt.services.PedidoService;
 import uy.com.curso.pizzahurt.services.PizzaService;
+import uy.com.curso.pizzahurt.services.UsuarioService;
 
 @Slf4j
 @RequestMapping("/protected/pedido")
@@ -29,26 +34,31 @@ import uy.com.curso.pizzahurt.services.PizzaService;
 public class PedidoController {
 
     private final PedidoService pedidoService;
+    private final UsuarioService usuarioService;
 
-    
     @GetMapping("/crear")
-    public String crearPedido(Model model, @ModelAttribute("carrito") CarritoDto carrito) {
-    	
+    public String crearPedido(Model model, @ModelAttribute("carrito") CarritoDto carrito,
+                              @AuthenticationPrincipal Usuario usuario) {
     	Pedido pedido = new Pedido();
-    	List<Pizza> pizzasPedido = pedido.getPizzas();
+        Optional<Usuario> aux = usuarioService.find(usuario.getId());
+        if (aux.isPresent()) {
+            AppHelper.fillPedidoDireccionfromUsuario(pedido, usuario);
+            AppHelper.fillPedidoMetodoPagofromUsuario(pedido, usuario);
+            List<Pizza> pizzasPedido = pedido.getPizzas();
 
-    	Iterator<Pizza> it = carrito.iterator();
-    	while (it.hasNext()) {
-    		System.out.println(it);
-    		pizzasPedido.add(it.next());	
-    		
-    		
-    	}
-    	
-    	model.addAttribute("pedido", pedido );
+            Iterator<Pizza> it = carrito.iterator();
+            while (it.hasNext()) {
+                System.out.println(it);
+                pizzasPedido.add(it.next());
 
-    	
-    	return ("editPedido");
+
+            }
+
+            model.addAttribute("pedido", pedido);
+            return ("editPedido");
+        }
+        //TODO ver que hacer con el error
+        return "editPedido";
     }
 
     @GetMapping("/show")
@@ -62,5 +72,10 @@ public class PedidoController {
             }
     }
 
-
+    @GetMapping("/list")
+    public String listPedido(Model model, @AuthenticationPrincipal Usuario usuario) {
+        List<PedidoDto> pedidosDto = pedidoService.findAllPedidoDtoByUsuario(usuario);
+        model.addAttribute("pedidosDto",pedidosDto);
+        return ("listPedidos");
+    }
 }

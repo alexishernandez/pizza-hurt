@@ -7,79 +7,96 @@
 	<nav th:replace="~{fragments/navbar}"></nav>
 
 	<div class="container mt-5">
-		<h1>Pedido</h1>
-
-
-		<div class="row mt-3">
-			<div class="col-md-6">
+		<div class="d-flex justify-content-center">
+			<h1>Crear un Pedido</h1>
+		</div>
+		<div class="card">
+			<div class="card-body">
 				<form th:object="${pedido}" th:action="@{/guardar}">
-					<div class="card">
-
-						<div class="card-header	">
-							Datos de Entrega
-						</div>
+					<div class="card w-95">
 						<div class="card-body">
-
-
-							<div
-								th:replace="~{fragments/campoDTO.html (field='nombreReceptor',	descripcion='Nombre del Receptor')}" />
-							<div
-								th:replace="~{fragments/campoDTO.html (field='barrio',			descripcion='Barrio')}" />
-							<div
-								th:replace="~{fragments/campoDTO.html (field='calle',			descripcion='Calle')}" />
-							<div
-								th:replace="~{fragments/campoDTO.html (field='nroPuerta',		descripcion='Numero de Puerta')}" />
-							<div
-								th:replace="~{fragments/campoDTO.html (field='apto',				descripcion='Apartamento')}" />
-							<div
-								th:replace="~{fragments/campoDTO.html (field='observaciones',	descripcion='Observaciones')}" />
-
-							<button type="submit" class="btn btn-primary">Guardar Cambios</button>
-
-						</div>
-					</div>
-
-
-					<div class="card">
-						<div class="card-header	">
-							Datos de Pago
-						</div>
-						<div class="card-body">
-
-							<div
-								th:replace="~{fragments/campoDTO.html (field='emisor',			descripcion='Emisor')}" />
-							<div
-								th:replace="~{fragments/campoDTO.html (field='nroTarjeta',		descripcion='Numero de Tarjeta')}" />
-							<div
-								th:replace="~{fragments/campoDTO.html (field='fechaVencimiento',	descripcion='Fecha de Vencimiento')}" />
-							<div
-								th:replace="~{fragments/campoDTO.html (field='codigoCVV',		descripcion='CVV')}" />
-
-						</div>
-					</div>
-
-					<div class="card">
-						<div class="card-header	">
-							Pizzas
-						</div>
-						<div class="card-body">
-
-							<div id="itemsPedido">
-								<ul th:each="item : *{pizzas}" class=" list-group fa-ul">
-									<li>												
-										
-										<span class="fa-li">
-											<i class="fa-solid fa-pizza-slice" ></i>
-										</span>
-										<span th:text="${item.nombre}"></span>
-									</li>
-								</ul>
+							<h5 class="card-title">Datos de Entrega</h5>
+							<div class="row align-items-center">
+								<div class="col-6">
+									<div th:replace="~{fragments/campoDTO.html(field='nombreReceptor',	descripcion='Nombre del Receptor')}"></div>
+								</div>
 							</div>
+							<div class="row align-items-center">
+								<div class="col-5">
+									<div th:replace="~{fragments/campoDTO.html(field='ciudad', descripcion='ciudad')}"></div>
+								</div>
+								<div class="col-5">
+									<div th:replace="~{fragments/campoDTO.html(field='barrio', descripcion='Barrio')}"></div>
+								</div>
+								<div class="col-2">
+									<div th:replace="~{fragments/campoDTO.html(field='codigoPostal', descripcion='Código Postal')}"></div>
+								</div>
 
+							</div>
+							<div class="row align-items-center">
+								<div class="col-8">
+									<div th:replace="~{fragments/campoDTO.html(field='calle', descripcion='Calle')}"></div>
+								</div>
+								<div class="col-2">
+									<div th:replace="~{fragments/campoDTO.html(field='nroPuerta', descripcion='Numero de Puerta')}"></div>
+								</div>
+								<div class="col-2">
+									<div th:replace="~{fragments/campoDTO.html(field='apto', descripcion='Apartamento')}"></div>
+								</div>
+							</div>
+							<div class="row align-items-center">
+								<div class="col-12">
+									<div th:replace="~{fragments/campoDTO.html(field='observaciones', descripcion='Observaciones')}"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card w-95 mt-2">
+						<div class="card-body">
+							<h5 class="card-title">Datos de Pago</h5>
+							<div class="row align-items-center">
+								<div class="col-6">
+									<div th:replace="~{fragments/campoDTO.html(field='emisor', descripcion='Emisor')}"></div>
+								</div>
+							</div>
+							<div class="row align-items-center">
+								<div class="col-6">
+									<div th:replace="~{fragments/campoDTO.html(field='nroTarjeta', descripcion='Numero de Tarjeta')}"></div>
+								</div>
+								<div class="col-3">
+									<div th:replace="~{fragments/campoDTO.html(field='fechaVencimiento', descripcion='Fecha de Vencimiento')}"></div>
+								</div>
+								<div class="col-3">
+									<div th:replace="~{fragments/campoDTO.html(field='codigoCVV', descripcion='CVV')}"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card w-95 mt-2">
+						<div class="card-body">
+							<h5 class="card-title">Pizzas del Pedido</h5>
+							<div class="row align-items-center">
+								<div id="itemsPedido">
+									<ul th:each="item : *{pizzas}" class=" list-group fa-ul">
+										<li>
+
+											<span class="fa-li">
+												<i class="fa-solid fa-pizza-slice" ></i>
+											</span>
+											<span th:text="${item.nombre}"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row mt-2">
+						<div class="col col-md-5 offset-md-5">
+							<button type="submit" class="btn btn-primary">Confirmar Pedido</button>
+							<a th:href="@{/protected/home}"  class="btn btn-secondary" role="button">Volver</a>
 						</div>
 					</div>
 				</form>
-
 			</div>
 		</div>
 	</div>

@@ -18,12 +18,12 @@ public class DomicilioValidator  implements ConstraintValidator<DomicilioConstra
                 (domicilio.getBarrio() == null || domicilio.getBarrio().isEmpty()) &&
                 (domicilio.getCalle()  == null || domicilio.getCalle().isEmpty()) &&
                 (domicilio.getNroPuerta()== null ||domicilio.getNroPuerta().isEmpty()) &&
-                (domicilio.getCodigoPostal() == null || domicilio.getCodigoPostal().isEmpty());
+                (domicilio.getCodigoPostal() == null || domicilio.getCodigoPostal() == 0);
         boolean isFullDomicilioBase= (domicilio.getCiudad() != null && !domicilio.getCiudad().isEmpty()) &&
                 (domicilio.getBarrio() != null && !domicilio.getBarrio().isEmpty()) &&
                 (domicilio.getCalle()  != null && !domicilio.getCalle().isEmpty()) &&
                 (domicilio.getNroPuerta() != null && !domicilio.getNroPuerta().isEmpty()) &&
-                (domicilio.getCodigoPostal() != null && !domicilio.getCodigoPostal().isEmpty());
+                (domicilio.getCodigoPostal() != null && !(domicilio.getCodigoPostal()==0));
 
         boolean isEmptyApto = (domicilio.getApto() == null || domicilio.getApto().isEmpty());
         boolean isEmptyObservaciones = (domicilio.getObservaciones() == null || domicilio.getObservaciones().isEmpty());

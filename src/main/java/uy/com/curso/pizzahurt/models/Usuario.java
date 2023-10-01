@@ -51,7 +51,7 @@ public class Usuario extends AbstractEntity implements UserDetails {
 
     private String apto;
 
-    private String codigoPostal;
+    private Integer codigoPostal;
 
     private String observaciones;
 

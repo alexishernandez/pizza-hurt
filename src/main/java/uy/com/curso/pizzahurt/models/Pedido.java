@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,8 @@ public class Pedido extends AbstractEntity {
     //Usuario que realiza pedido
     @ManyToOne
     private Usuario usuario;
+
+    private Date fechaPedido;
 
     //Lugar de entrega
     @Size(min=3, max=20, message="El nombre debe tener como mínimo {min} y máximo {max} caracteres")
@@ -39,7 +42,7 @@ public class Pedido extends AbstractEntity {
     private String	calle;
 
     @NotNull
-    private Integer	nroPuerta;
+    private String	nroPuerta;
 
     @NotNull
     private String	apto;
