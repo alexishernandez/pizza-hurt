@@ -63,6 +63,7 @@ public class SecurityCustomConfig {
                         .loginPage("/login")
                         .permitAll()
                         .defaultSuccessUrl("/protected/home", true)
+                        .failureUrl("/login?error=true")
 
                 );
         return http.build();

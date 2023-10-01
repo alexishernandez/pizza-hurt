@@ -19,6 +19,13 @@
                             <div class="card">
                                 <div class="card-body">
                                     <form method="POST" th:action="@{/login}" id="loginForm">
+                                        <div th:if="${param.error}" class="status_message">
+                                            <div class="alert alert-danger">
+                                                <span>Usuario o Contraseña Incorrecto</span>
+                                            </div>
+
+                                        </div>
+
                                         <div class="form-group">
                                             <label for="username">Correo Electrónico</label>
                                             <input type="email" class="form-control" id="username" name="username" placeholder="Ingresa tu correo electrónico" required>
