@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uy.com.curso.pizzahurt.dtos.RegistroDto;
+import uy.com.curso.pizzahurt.helpers.AppHelper;
 import uy.com.curso.pizzahurt.models.Usuario;
 import uy.com.curso.pizzahurt.repositories.UsuarioRepository;
 
@@ -47,11 +48,11 @@ public class UsuarioService implements UserDetailsService {
     @Transactional
     public Usuario createUsuarioByRegistroDto(RegistroDto registroDto){
         Usuario usuario = new Usuario();
+        AppHelper.fillUsuarioFromRegistroDto(registroDto,usuario);
         usuario.setNombreCompleto(registroDto.getNombreCompleto());
         usuario.setEmail(registroDto.getEmail());
         usuario.setTelefono(registroDto.getTelefono());
-        usuario.setPassword(encoder.encode(registroDto.getPassword()));
-        usuario.setActivo(true);
+
         usuario = usuarioRepository.save(usuario);
         return usuario;
     }

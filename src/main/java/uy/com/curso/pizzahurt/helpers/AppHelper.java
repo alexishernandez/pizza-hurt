@@ -1,22 +1,29 @@
 package uy.com.curso.pizzahurt.helpers;
 
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import uy.com.curso.pizzahurt.dtos.RegistroDto;
 import uy.com.curso.pizzahurt.models.Usuario;
 
-public class AppHelper {
+@Data
+@Component
+public  class AppHelper {
 
-    private final PasswordEncoder passwordEncoder;
 
-    public AppHelper(PasswordEncoder passwordEncoder) {
-        super();
-        this.passwordEncoder = passwordEncoder;
-     }
+    private static PasswordEncoder encoder;
 
-    public void loadUsuarioFromRegistroDto(RegistroDto registroDto, Usuario usuario){
-        registroDto.setNombreCompleto(usuario.getNombreCompleto());
-        registroDto.setEmail(usuario.getEmail());
-        registroDto.setTelefono(usuario.getTelefono());
-        registroDto.setPassword(usuario.getPassword());
+    @Autowired
+    public AppHelper(PasswordEncoder encoder) {
+        AppHelper.encoder = encoder;
+    }
+
+    public static void fillUsuarioFromRegistroDto(RegistroDto registroDto, Usuario usuario){
+        usuario.setNombreCompleto(registroDto.getNombreCompleto());
+        usuario.setActivo(true);
+        usuario.setTelefono(registroDto.getTelefono());
+        usuario.setEmail(registroDto.getEmail());
+        usuario.setPassword(encoder.encode(registroDto.getPassword()));
     }
 }
