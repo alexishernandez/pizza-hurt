@@ -1,9 +1,13 @@
 package uy.com.curso.pizzahurt.helpers;
 
-import lombok.Data;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import lombok.Data;
 import uy.com.curso.pizzahurt.dtos.PedidoDto;
 import uy.com.curso.pizzahurt.dtos.RegistroDto;
 import uy.com.curso.pizzahurt.models.Pedido;
@@ -38,13 +42,16 @@ public  class AppHelper {
         if (!pedido.getApto().isEmpty()){
             direccion =direccion+"/"+pedido.getApto();
         }
-        direccion = direccion+"("+pedido.getCiudad()+"-"+pedido.getBarrio()+")";
+        direccion = direccion + "(" + pedido.getCiudad() + "-" + pedido.getBarrio() + ")";
         pedidoDto.setDireccion(direccion);
-        String nombrePizzas="";
+        
+        // Concateno los nombres de las pizzas para presentarlos
+        List<String> listaNombresPizza = new ArrayList<String>();
         for ( Pizza pizza: pedido.getPizzas()) {
-            nombrePizzas = nombrePizzas+pizza.getNombre()+"-";
+        	listaNombresPizza.add(pizza.getNombre());
+        	
         }
-        nombrePizzas = nombrePizzas.substring(0 ,nombrePizzas.length()-1);
+        String nombrePizzas = String.join("-", listaNombresPizza);
         pedidoDto.setPizzas(nombrePizzas);
     }
 

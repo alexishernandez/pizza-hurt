@@ -1,12 +1,13 @@
 package uy.com.curso.pizzahurt.services;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
+
 import uy.com.curso.pizzahurt.dtos.PedidoDto;
 import uy.com.curso.pizzahurt.helpers.AppHelper;
 import uy.com.curso.pizzahurt.models.Pedido;
@@ -40,6 +41,8 @@ public class PedidoService {
 
     @Transactional
     public void crearPedido(Pedido pedido){
+    	pedido.setFechaPedido(new Date());
         pedidoRepository.save(pedido);
     }
+    
 }

@@ -4,13 +4,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uy.com.curso.pizzahurt.dtos.CarritoDto;
@@ -19,9 +24,7 @@ import uy.com.curso.pizzahurt.helpers.AppHelper;
 import uy.com.curso.pizzahurt.models.Pedido;
 import uy.com.curso.pizzahurt.models.Pizza;
 import uy.com.curso.pizzahurt.models.Usuario;
-import uy.com.curso.pizzahurt.services.IngredienteService;
 import uy.com.curso.pizzahurt.services.PedidoService;
-import uy.com.curso.pizzahurt.services.PizzaService;
 import uy.com.curso.pizzahurt.services.UsuarioService;
 
 @Slf4j

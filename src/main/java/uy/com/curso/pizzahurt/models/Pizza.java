@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,8 @@ import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 public class Pizza extends AbstractEntity {
 
     @NotNull
+    @NotBlank
+    @Size(min=6, max=40)
     private String	nombre;
 
     private Integer	precio;
