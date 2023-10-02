@@ -25,11 +25,11 @@
                         </thead>
                         <tbody>
                         <tr th:each="pedidoDto : ${pedidosDto}" >
-                            <th th:text="${pedidosDto.id}"></th>
-                            <td>"${pedidosDto.fecha}"</td>
-                            <td>"${pedidosDto.receptor}"</td>
-                            <td>"${pedidosDto.direccion}"</td>
-                            <td>"${pedidosDto.pizzas}"</td>
+                            <th th:text="${pedidoDto.id}"></th>
+                            <td th:text="${pedidoDto.fecha}"></td>
+                            <td th:text="${pedidoDto.receptor}"></td>
+                            <td th:text="${pedidoDto.direccion}"></td>
+                            <td th:text="${pedidoDto.pizzas}"></td>
                         </tr>
 
                         </tbody>

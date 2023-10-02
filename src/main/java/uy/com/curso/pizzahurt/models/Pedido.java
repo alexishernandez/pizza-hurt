@@ -1,5 +1,6 @@
 package uy.com.curso.pizzahurt.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -74,6 +75,6 @@ public class Pedido extends AbstractEntity {
     private String codigoCVV;
 
     //ordenes
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Pizza> pizzas = new ArrayList<>();
 }
