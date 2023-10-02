@@ -60,11 +60,6 @@ public class PizzaController {
 	    return ingredienteService.getAllToppings() ;
 	}
 
-	
-
-	
-	// - - - 
-	
 	 @GetMapping("/crear") 
 	 public String crearPizza(Model model) {
 		 

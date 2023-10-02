@@ -59,4 +59,5 @@ public class RegistroController {
         model.addAttribute("mensaje","Usuario creado correctamente...");
         return "registroUsuario";
     }
+
 }

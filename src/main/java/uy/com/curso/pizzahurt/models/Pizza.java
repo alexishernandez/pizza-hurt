@@ -26,10 +26,11 @@ public class Pizza extends AbstractEntity {
     private String	nombre;
 
     private Integer	precio;
-    
-    @OneToOne
+
+
     @NotNull
-    private Ingrediente masa;
+    @ManyToMany
+    private List<Ingrediente> masa = new LinkedList<>();
 
     @NotNull
     @Size(min=1, message="La pizza debe tener al menos 1 salsa")

@@ -1,5 +1,7 @@
 package uy.com.curso.pizzahurt.helpers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +38,9 @@ public  class AppHelper {
 
     public static void fillPedidoDtofromPedido(PedidoDto pedidoDto, Pedido pedido){
         pedidoDto.setId(pedido.getId());
-        pedidoDto.setFecha(pedido.getFechaPedido().toString());
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        String strDate = dateFormat.format(pedido.getFechaPedido());
+        pedidoDto.setFecha(strDate);
         pedidoDto.setReceptor(pedido.getNombreReceptor());
         String direccion = pedido.getCalle()+" "+pedido.getNroPuerta();
         if (!pedido.getApto().isEmpty()){

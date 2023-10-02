@@ -6,7 +6,7 @@ import uy.com.curso.pizzahurt.models.Ingrediente;
 import uy.com.curso.pizzahurt.services.IngredienteService;
 
 @Component
-public class IngredienteConverter implements Converter<String, Ingrediente> {
+public class IngredienteConverter implements Converter<Long, Ingrediente> {
 
     private IngredienteService ingredienteService;
 
@@ -16,8 +16,8 @@ public class IngredienteConverter implements Converter<String, Ingrediente> {
     }
 
     @Override
-    public Ingrediente convert(String nombre) {
-        return ingredienteService.findByNombre(nombre);
+    public Ingrediente convert(Long id) {
+        return ingredienteService.find(id).orElseThrow();
     }
 
     

@@ -60,12 +60,14 @@ public class PedidoController {
     }
 
     @PostMapping("/guardar")
-    public String guardarPedido(@Valid Pedido pedido, BindingResult result, @AuthenticationPrincipal Usuario usuario, Model model) {
+    public String guardarPedido(@Valid Pedido pedido, BindingResult result, @AuthenticationPrincipal Usuario usuario,@ModelAttribute("carrito") CarritoDto carrito, Model model) {
         if (result.hasErrors()){
             return "editPedido";
         }else{
             pedido.setUsuario(usuario);
+            pedido.getPizzas().addAll(carrito);
             pedidoService.crearPedido(pedido);
+            carrito.clear();
             return "editPedido";
         }
     }
@@ -76,9 +78,9 @@ public class PedidoController {
         Optional<Pedido> pedido = pedidoService.find(id);
         if (pedido.isPresent()){
             model.addAttribute("pedido",pedido.get());
-            return "editPedido";
+            return "showPedido";
         }else{
-            return "editPedido";
+            return "showPedido";
             }
     }
 

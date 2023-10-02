@@ -20,8 +20,11 @@ public class PedidoService {
 
     private final PedidoRepository pedidoRepository;
 
-    public PedidoService(PedidoRepository pedidoRepository) {
+    private final PizzaService pizzaService;
+
+    public PedidoService(PedidoRepository pedidoRepository, PizzaService pizzaService) {
         this.pedidoRepository = pedidoRepository;
+        this.pizzaService = pizzaService;
     }
 
     public Optional<Pedido> find(long id){
@@ -42,6 +45,9 @@ public class PedidoService {
     @Transactional
     public void crearPedido(Pedido pedido){
     	pedido.setFechaPedido(new Date());
+        System.out.println("********************************");
+        pedido.getPizzas().forEach(System.out::println);
+        System.out.println("********************************");
         pedidoRepository.save(pedido);
     }
     
