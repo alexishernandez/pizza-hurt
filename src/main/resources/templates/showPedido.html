@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: _head('Perfil del Usuario')"></head>
+<head th:replace="~{fragments/head :: _head('Perfil del Usuario')}"></head>
 
 <body>
-<nav th:replace="fragments/navbar :: _nav"></nav>
+<nav th:replace="~{fragments/navbar :: _nav}"></nav>
 
 <div class="container mt-5">
     <h1>Pedido</h1>

@@ -25,15 +25,12 @@ public class AppController {
 
     @GetMapping("/")
     public String home(Model model) {
-        Usuario usuario= new Usuario();
-        model.addAttribute("usuario",usuario);
         return "home";
     }
 
     @GetMapping("/home")
     public String home1(Model model) {
-        Usuario usuario= new Usuario();
-        model.addAttribute("usuario",usuario);
+        System.out.println("Entre en home1");
         return "home";
     }
 

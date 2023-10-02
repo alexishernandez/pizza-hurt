@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: _head('Perfil del Usuario')}"></head>
+
+<body>
+<nav th:replace="~{fragments/navbar :: _nav}"></nav>
+
+<div class="container mt-5">
+
+        <h3> Upss.. ha ocurrido un error</h3>
+        <span th:text="${exception}"></span>
+</div>
+
+<footer th:replace="~{fragments/footer:: _footer}"></footer>
+
+</body>
+</html>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import uy.com.curso.pizzahurt.dtos.PedidoDto;
+import uy.com.curso.pizzahurt.exceptions.PedidoNotFoundException;
 import uy.com.curso.pizzahurt.helpers.AppHelper;
 import uy.com.curso.pizzahurt.models.Pedido;
 import uy.com.curso.pizzahurt.models.Usuario;
@@ -27,11 +28,13 @@ public class PedidoService {
         this.pizzaService = pizzaService;
     }
 
-    public Optional<Pedido> find(long id){
-        return pedidoRepository.findById(id);
+    public Pedido find(long id) throws PedidoNotFoundException {
+
+        return pedidoRepository.findById(id).orElseThrow(() -> new PedidoNotFoundException("No se encontró el pedido"));
     }
 
     public List<PedidoDto> findAllPedidoDtoByUsuario(Usuario usuario){
+
         List<PedidoDto> pedidoDtoList = new LinkedList<PedidoDto>();
         List<Pedido>  pedidos = pedidoRepository.findAllByUsuario(usuario);
         for (Pedido pedido: pedidos){

@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uy.com.curso.pizzahurt.dtos.RegistroDto;
+import uy.com.curso.pizzahurt.exceptions.PedidoNotFoundException;
+import uy.com.curso.pizzahurt.exceptions.UsuarioNotFoundException;
 import uy.com.curso.pizzahurt.helpers.AppHelper;
 import uy.com.curso.pizzahurt.models.Usuario;
 import uy.com.curso.pizzahurt.repositories.UsuarioRepository;
@@ -89,8 +91,8 @@ public class UsuarioService implements UserDetailsService {
         return encoder.matches(password, usuario.getPassword());
     }
 
-    public Optional<Usuario> find(long id){
-        return usuarioRepository.findById(id);
+    public Usuario find(long id) throws UsuarioNotFoundException {
+        return usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNotFoundException("No se encontró el pedido"));
     }
 
     public Usuario findByEmail( String email){

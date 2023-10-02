@@ -50,6 +50,7 @@ public class SecurityCustomConfig {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(mvc.pattern("/protected/**")).authenticated()
+                        .requestMatchers(mvc.pattern("/home")).authenticated()
                         .requestMatchers(mvc.pattern("/**"),mvc.pattern("/")).permitAll()
 
                 )
