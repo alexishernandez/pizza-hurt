@@ -10,6 +10,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import uy.com.curso.pizzahurt.models.common.AbstractEntity;
+import uy.com.curso.pizzahurt.validators.DomicilioConstraint;
+import uy.com.curso.pizzahurt.validators.DomicilioPedidoConstraint;
+import uy.com.curso.pizzahurt.validators.TarjetaConstraint;
+import uy.com.curso.pizzahurt.validators.TarjetaPedidoConstraint;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +23,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@DomicilioPedidoConstraint
+@TarjetaPedidoConstraint
 public class Pedido extends AbstractEntity {
 
     //Usuario que realiza pedido

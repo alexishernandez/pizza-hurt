@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import uy.com.curso.pizzahurt.dtos.PedidoDto;
 import uy.com.curso.pizzahurt.helpers.AppHelper;
 import uy.com.curso.pizzahurt.models.Pedido;
@@ -35,5 +36,10 @@ public class PedidoService {
             pedidoDtoList.add(pedidoDto);
         }
         return pedidoDtoList;
+    }
+
+    @Transactional
+    public void crearPedido(Pedido pedido){
+        pedidoRepository.save(pedido);
     }
 }

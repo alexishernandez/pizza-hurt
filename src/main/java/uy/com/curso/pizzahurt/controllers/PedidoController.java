@@ -4,14 +4,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,13 +43,10 @@ public class PedidoController {
             AppHelper.fillPedidoDireccionfromUsuario(pedido, usuario);
             AppHelper.fillPedidoMetodoPagofromUsuario(pedido, usuario);
             List<Pizza> pizzasPedido = pedido.getPizzas();
-
             Iterator<Pizza> it = carrito.iterator();
             while (it.hasNext()) {
                 System.out.println(it);
                 pizzasPedido.add(it.next());
-
-
             }
 
             model.addAttribute("pedido", pedido);
@@ -60,6 +55,18 @@ public class PedidoController {
         //TODO ver que hacer con el error
         return "editPedido";
     }
+
+    @PostMapping("/guardar")
+    public String guardarPedido(@Valid Pedido pedido, BindingResult result, @AuthenticationPrincipal Usuario usuario, Model model) {
+        if (result.hasErrors()){
+            return "editPedido";
+        }else{
+            pedido.setUsuario(usuario);
+            pedidoService.crearPedido(pedido);
+            return "editPedido";
+        }
+    }
+
 
     @GetMapping("/show")
     public String showPedido(Model model, @RequestParam(name="id") Long id) {
