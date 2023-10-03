@@ -13,6 +13,7 @@
 		<div class="card">
 			<div class="card-body">
 				<form th:object="${pedido}" th:action="@{/protected/pedido/guardar}" method="post">
+					<div th:if="${success}" th:text="${success}" th:class="${'status_message alert alert-success'}"></div>
 					<div class="card w-95">
 						<div class="card-body">
 							<h5 class="card-title">Datos de Entrega</h5>
@@ -102,7 +103,7 @@
 	</div>
 
 	<footer th:replace="~{fragments/footer}"></footer>
-
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 </body>
 
 </html>

@@ -2,7 +2,6 @@ package uy.com.curso.pizzahurt.controllers;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,6 +14,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import uy.com.curso.pizzahurt.dtos.CarritoDto;
 import uy.com.curso.pizzahurt.dtos.PedidoDto;
 import uy.com.curso.pizzahurt.exceptions.PedidoNotFoundException;
@@ -55,7 +55,9 @@ public class PedidoController {
     }
 
     @PostMapping("/guardar")
-    public String guardarPedido(@Valid Pedido pedido, BindingResult result, @AuthenticationPrincipal Usuario usuario,@ModelAttribute("carrito") CarritoDto carrito, Model model) {
+    public String guardarPedido(@Valid Pedido pedido, BindingResult result,
+            @AuthenticationPrincipal Usuario usuario,@ModelAttribute("carrito") CarritoDto carrito, Model model,
+            RedirectAttributes attributes) {
         if (result.hasErrors()){
             return "editPedido";
         }else{
@@ -63,7 +65,10 @@ public class PedidoController {
             pedido.getPizzas().addAll(carrito);
             pedidoService.crearPedido(pedido);
             carrito.clear();
-            return "editPedido";
+            model.addAttribute("success","Actualización exitosa...");
+            attributes.addFlashAttribute("success", "Object has been add successfully.");
+
+            return "redirect:/protected/pedido/list";
         }
     }
 
@@ -94,7 +99,7 @@ public class PedidoController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("exception",exception.getMessage());
         modelAndView.addObject("url", request.getRequestURL());
-        modelAndView.setViewName("error");
+        modelAndView.setViewName("error_old");
     return modelAndView ;
     }
 }
