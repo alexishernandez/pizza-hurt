@@ -18,6 +18,7 @@ import java.util.Optional;
 @Slf4j
 @RequestMapping("protected/usuario")
 @Controller
+@SessionAttributes("carrito")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;

@@ -21,6 +21,7 @@
                             <th scope="col">Receptor</th>
                             <th scope="col">Dirección</th>
                             <th scope="col">Pizzas</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,6 +31,12 @@
                             <td th:text="${pedidoDto.receptor}"></td>
                             <td th:text="${pedidoDto.direccion}"></td>
                             <td th:text="${pedidoDto.pizzas}"></td>
+                            <td>
+                                <a th:href="@{/protected/pedido/show(id=${pedidoDto.id})}" type="button" class="btn btn-sm btn-outline-primary">
+                                    <i class="fa-solid fa-eye mt-1 me-1"></i>
+                                    <span class="">ver</span>
+                                </a>
+                            </td>
                         </tr>
 
                         </tbody>
