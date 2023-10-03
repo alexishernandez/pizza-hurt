@@ -6,7 +6,7 @@
 <nav th:replace="~{fragments/navbar :: _nav}"></nav>
 <div class="container mt-5">
     <div class="d-flex justify-content-center">
-        <h1>Crear un Pedido</h1>
+        <h1>Ver el Pedido</h1>
     </div>
     <div class="card">
         <div class="card-body">
@@ -18,10 +18,13 @@
                             <div class="col-6">
                                 <div th:replace="~{fragments/campoDTO_readonly.html(field='nombreReceptor',	descripcion='Nombre del Receptor')}"></div>
                             </div>
+                            <div class="col-3 offset-2">
+                                <div th:replace="~{fragments/campoFechaDTO_readonly.html(field='fechaPedido', descripcion='Fecha del Pedido')}"></div>
+                            </div>
                         </div>
-                        <div class="row align-items-center">
+                        <div class="row align-items-center mt-2">
                             <div class="col-5">
-                                <div th:replace="~{fragments/campoDTO_readonly.html(field='ciudad', descripcion='ciudad')}"></div>
+                                <div th:replace="~{fragments/campoDTO_readonly.html(field='ciudad', descripcion='Ciudad')}"></div>
                             </div>
                             <div class="col-5">
                                 <div th:replace="~{fragments/campoDTO_readonly.html(field='barrio', descripcion='Barrio')}"></div>
@@ -31,7 +34,7 @@
                             </div>
 
                         </div>
-                        <div class="row align-items-center">
+                        <div class="row align-items-center mt-2">
                             <div class="col-8">
                                 <div th:replace="~{fragments/campoDTO_readonly.html(field='calle', descripcion='Calle')}"></div>
                             </div>
@@ -42,7 +45,7 @@
                                 <div th:replace="~{fragments/campoDTO_readonly.html(field='apto', descripcion='Apartamento')}"></div>
                             </div>
                         </div>
-                        <div class="row align-items-center">
+                        <div class="row align-items-center mt-2">
                             <div class="col-12">
                                 <div th:replace="~{fragments/campoDTO_readonly.html(field='observaciones', descripcion='Observaciones')}"></div>
                             </div>
@@ -52,12 +55,12 @@
                 <div class="card w-95 mt-2">
                     <div class="card-body">
                         <h5 class="card-title">Datos de Pago</h5>
-                        <div class="row align-items-center">
+                        <div class="row align-items-center mt-2">
                             <div class="col-6">
                                 <div th:replace="~{fragments/campoDTO_readonly.html(field='emisor', descripcion='Emisor')}"></div>
                             </div>
                         </div>
-                        <div class="row align-items-center">
+                        <div class="row align-items-center mt-2">
                             <div class="col-6">
                                 <div th:replace="~{fragments/campoDTO_readonly.html(field='nroTarjeta', descripcion='Numero de Tarjeta')}"></div>
                             </div>
@@ -73,14 +76,13 @@
                 <div class="card w-95 mt-2">
                     <div class="card-body">
                         <h5 class="card-title">Pizzas del Pedido</h5>
-                        <div class="row align-items-center">
+                        <div class="row align-items-center mt-2">
                             <div id="itemsPedido">
                                 <ul th:each="item : *{pizzas}" class=" list-group fa-ul">
                                     <li>
-
-											<span class="fa-li">
-												<i class="fa-solid fa-pizza-slice" ></i>
-											</span>
+                                        <span class="fa-li">
+                                            <i class="fa-solid fa-pizza-slice" ></i>
+                                        </span>
                                         <span th:text="${item.nombre}"></span>
                                     </li>
                                 </ul>

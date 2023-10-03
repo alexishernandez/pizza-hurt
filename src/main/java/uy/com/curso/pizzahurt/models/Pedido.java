@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 import uy.com.curso.pizzahurt.validators.DomicilioConstraint;
 import uy.com.curso.pizzahurt.validators.DomicilioPedidoConstraint;
@@ -32,6 +33,7 @@ public class Pedido extends AbstractEntity {
     @ManyToOne
     private Usuario usuario;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:MM")
     private Date fechaPedido;
 
     //Lugar de entrega
