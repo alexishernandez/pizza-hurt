@@ -69,7 +69,7 @@ public class PizzaController {
 		 return "editPizza";
 	 }
 	 
-	 @PostMapping("/crear") 
+	 @PostMapping("/crear")
 	 public String guardarPizza(@Valid Pizza pizza, @ModelAttribute("carrito") CarritoDto carrito, Errors errores, Model model) {
 
         if (errores.hasErrors()) {
@@ -84,11 +84,19 @@ public class PizzaController {
 	        return "editPizza";
 
         }
-
-		 
-
 		 
 	 }
+	
+	 
+/*	 
+	 @PostMapping("/borrar") 
+	 public String borrarPizza(@Valid Pizza pizza, @ModelAttribute("carrito") CarritoDto carrito, 
+			 				    Errors errores, Model model) {
+
+		 return 
+	 }
+*/	 
+	 
 	 
 
 

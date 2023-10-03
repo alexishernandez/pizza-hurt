@@ -30,7 +30,6 @@
 
 				<!-- carrito -->
 
-
 				<div class="dropdown">
 
 					<div class="nav-link active dropdown-toggle" data-bs-toggle="dropdown"
@@ -39,31 +38,9 @@
 					</div>
 
 					<div class="dropdown-menu">
-						<div class="card">
-							
-							<div class="card-body">
-
-								<h6 class="card-title">Carrito de Compra</h6>
-				
-				 				<p class="card-text">
-									<div id="itemsCarrito">
-										<ul th:each="item : ${carrito}" class=" list-group fa-ul">
-											<li>												
-												
-												<span class="fa-li">
-													<i class="fa-solid fa-pizza-slice" ></i>
-												</span>
-												<span th:text="${item.nombre}"></span>
-											</li>
-										</ul>
-									</div>
-								</p>
-								<div>
-									<a th:href="@{/protected/pedido/crear}" class="btn btn-primary">Completar Pedido</a>
-								</div>
-							</div>
-						</div>
+						<div th:replace="~{fragments/carrito.html(carrito=${carrito})}"></div>
 					</div>
+
 
 				</div>
 
