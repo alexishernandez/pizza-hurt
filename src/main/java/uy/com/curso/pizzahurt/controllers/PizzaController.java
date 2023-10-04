@@ -62,25 +62,19 @@ public class PizzaController {
 
 	 @GetMapping("/crear") 
 	 public String crearPizza(Model model) {
-		 
-		 
 		 model.addAttribute("pizza", new Pizza());
-		 
 		 return "editPizza";
 	 }
 	 
 	 @PostMapping("/crear")
-	 public String guardarPizza(@Valid Pizza pizza, @ModelAttribute("carrito") CarritoDto carrito, Errors errores, Model model) {
+	 public String guardarPizza(@Valid Pizza pizza,Errors errores, @ModelAttribute("carrito") CarritoDto carrito, Model model) {
 
         if (errores.hasErrors()) {
             log.error("Se encontraron errores al validar la pizza: {}", errores.getAllErrors());
             return "editPizza";
         } else  {
-
-        	System.out.println("----------------------");
-        	System.out.println(pizza);
         	carrito.add(pizza);
-        	
+			model.addAttribute("success","Pizza creada exitosamente.");
 	        return "editPizza";
 
         }

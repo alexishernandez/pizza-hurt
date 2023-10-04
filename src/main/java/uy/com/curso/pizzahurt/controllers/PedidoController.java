@@ -49,7 +49,6 @@ public class PedidoController {
             System.out.println(it);
             pizzasPedido.add(it.next());
         }
-
         model.addAttribute("pedido", pedido);
         return ("editPedido");
     }

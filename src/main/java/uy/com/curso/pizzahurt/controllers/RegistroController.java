@@ -30,9 +30,7 @@ public class RegistroController {
     @GetMapping("/login")
     public String login(@RequestParam(value = "error",defaultValue = "false") boolean loginError ) {
         if (loginError){
-
         }
-
         return "login";
     }
 

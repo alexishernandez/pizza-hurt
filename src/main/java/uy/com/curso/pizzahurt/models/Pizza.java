@@ -21,12 +21,11 @@ import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 public class Pizza extends AbstractEntity {
 
     @NotNull
-    @NotBlank
-    @Size(min=6, max=40)
+    @NotBlank(message = "El campo nombre no puede ser vacío")
+    @Size(min=6, max=40, message = "El nombre debe contener entre {min} y {max} caracteres")
     private String	nombre;
 
     private Integer	precio;
-
 
     @NotNull
     @ManyToMany

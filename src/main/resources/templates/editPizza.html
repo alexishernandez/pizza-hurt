@@ -7,70 +7,86 @@
 	<nav th:replace="~{fragments/navbar}"></nav>
 
 	<div class="container mt-5">
-		<h1>Disena tu pizza:</h1>
-		<div class="row mt-3">
-			<div class="col-md-6">
-				<div class="card">
-					<div class="card-header	">
-						Datos de la pizza
+		<div class="d-flex justify-content-center">
+			<h1>Crea tu Pizza</h1>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<div th:if="${success}" th:text="${success}" th:class="${'status_message alert alert-success'}"></div>
+				<form th:object="${pizza}" th:action="@{/protected/pizza/crear}" method="post">
+					<div class="card w-95">
+						<div class="card-body">
+							<div class="row align-items-center mt-lg-3">
+								<div class="col-8">
+									<div th:replace="~{fragments/campoDTO.html (field='nombre',	descripcion='Nombra tu Pizza')}"/>
+								</div>
+							</div>
+							<div class="row align-items-center mt-2">
+								<div id="masas" class="col-10">
+									<label>Eleji tu Masa:</label>
+									<select id="selMasa" class="form-select" th:field="*{masa}">
+										<option th:each="masaPizza : ${allMasas}" th:value="${masaPizza.id}"
+											th:text="${masaPizza.nombre}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="row align-items-center mt-lg-3">
+								<div id="salsas" class="col-10">
+									<label for="selSalsas">Elejí tus salsas: <span class="fw-lighter">(Puedes seleccionar mas de uno)</span></label>
+									<select id="selSalsas" class="form-select" th:field="*{salsas}"
+											th:classappend="${#fields.hasErrors('salsas')} ? 'is-invalid' : ''"
+											aria-describedby="validationSalsas" multiple >
+										<option th:each="salsaPizza : ${allSalsas}" th:value="${salsaPizza.id}"
+											th:text="${salsaPizza.nombre}"></option>
+									</select>
+									<div id="validationSalsas" class="invalid-feedback">
+										<p th:if="${#fields.hasErrors('salsas')}" th:errors="*{salsas}">Error</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="row align-items-center mt-lg-3">
+								<div id="quesos" class="col-10">
+									<label for="selQuesos">Cubrila de Quesos: <span class="fw-lighter">(Puedes seleccionar mas de uno)</span></label>
+									<select id="selQuesos" class="form-select" th:size="${#lists.size(allQuesos)}"
+											th:field="*{quesos}" th:classappend="${#fields.hasErrors('quesos')} ? 'is-invalid' : ''"
+											aria-describedby="validationQuesos" multiple>
+										<option th:each="quesosPizza : ${allQuesos}" th:value="${quesosPizza.id}"
+											th:text="${quesosPizza.nombre}"></option>
+									</select>
+									<div id="validationQuesos" class="invalid-feedback">
+										<p th:if="${#fields.hasErrors('quesos')}" th:errors="*{quesos}">Error</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="row align-items-center mt-lg-3">
+								<div id="toppings" class="col-10">
+									<label for="selToppings">Ponele tus Toppings: <span class="fw-lighter">(Puedes seleccionar mas de uno)</span></label>
+									<select id="selToppings" class="form-select" th:size="${#lists.size(allToppings)}"
+											th:field="*{toppings}" th:classappend="${#fields.hasErrors('toppings')} ? 'is-invalid' : ''"
+											aria-describedby="validationToppings"  multiple>
+										<option th:each="toppingsPizza : ${allToppings}" th:value="${toppingsPizza.id}"
+											th:text="${toppingsPizza.nombre}"></option>
+									</select>
+									<div id="validationToppings" class="invalid-feedback">
+										<p th:if="${#fields.hasErrors('toppings')}" th:errors="*{toppings}">Error</p>
+									</div>
+								</div>
+							</div>
+							<div class="row mt-2">
+								<div class="col col-md-5 offset-md-5">
+									<button type="submit" class="btn btn-primary">Guardar Cambios</button>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="card-body">
-						<form th:object="${pizza}" th:action="@{/protected/pizza/crear}" method="post">
-
-							<div th:replace="~{fragments/campoDTO.html (field='nombre',	descripcion='Nombra tu Pizza')}"/>
-
-							<div id="masas">
-								<label>Eleji tu Masa:</label>
-
-
-								<select id="selMasa" class="form-control" th:field="*{masa}">
-									<option th:each="masaPizza : ${allMasas}" th:value="${masaPizza.id}"
-										th:text="${masaPizza.nombre}"></option>
-								</select>
-
-							</div>
-
-
-							<div id="salsas">
-								<label for="selSalsas">Eleji tus salsas:</label>
-
-								<select id="selSalsas" class="form-control" th:field="*{salsas}" multiple>
-									<option th:each="salsaPizza : ${allSalsas}" th:value="${salsaPizza.id}"
-										th:text="${salsaPizza.nombre}"></option>
-								</select>
-							</div>
-
-
-							<div id="quesos">
-								<label for="selQuesos">Cubrila de Quesos:</label>
-
-								<select id="selQuesos" class="form-control" th:field="*{quesos}" multiple>
-									<option th:each="quesosPizza : ${allQuesos}" th:value="${quesosPizza.id}"
-										th:text="${quesosPizza.nombre}"></option>
-								</select>
-							</div>
-
-							<div id="toppings">
-								<label for="selToppings">Ponele tus Toppings:</label>
-
-								<select id="selToppings" class="form-control" th:field="*{toppings}" multiple>
-									<option th:each="toppingsPizza : ${allToppings}" th:value="${toppingsPizza.id}"
-										th:text="${toppingsPizza.nombre}"></option>
-								</select>
-							</div>
-
-							<button type="submit" class="btn btn-primary">Guardar Cambios</button>
-						</form>
-					</div>
-				</div>
-
-
+				</form>
 			</div>
 		</div>
 	</div>
 
 	<footer th:replace="~{fragments/footer:: _footer}"></footer>
-
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 </body>
-
 </html>

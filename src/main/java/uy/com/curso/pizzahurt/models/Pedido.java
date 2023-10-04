@@ -6,10 +6,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.CreditCardNumber;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 import uy.com.curso.pizzahurt.validators.DomicilioConstraint;
@@ -37,8 +40,8 @@ public class Pedido extends AbstractEntity {
     private Date fechaPedido;
 
     //Lugar de entrega
-    @Size(min=3, max=20, message="El nombre debe tener como mínimo {min} y máximo {max} caracteres")
     @NotNull
+    @Size(min=3, max=20, message="El nombre debe tener como mínimo {min} y máximo {max} caracteres")
     private String	nombreReceptor;
 
     @NotNull
@@ -56,7 +59,7 @@ public class Pedido extends AbstractEntity {
     @NotNull
     private String	apto;
 
-    @NotNull
+    @Range(min=10000, max=99999,message = "El Código Postal debe tener 5 digitos")
     private Integer codigoPostal;
 
 
@@ -67,13 +70,15 @@ public class Pedido extends AbstractEntity {
     private String emisor;
 
     @NotNull
+    @CreditCardNumber(message="El nro de tarjeta no es válido")
     private String nroTarjeta;
 
     @NotNull
+    @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([2-9][0-9])$", message="Fecha inválida, el formato correcto es: MM/YY")
     private String fechaVencimiento;
 
     @NotNull
-    @Digits(integer=3, fraction=0, message="Código CVV inválido")
+    @Pattern(regexp="^[0-9]{3}$", message="CódigoCVV invalido")
     private String codigoCVV;
 
     //ordenes

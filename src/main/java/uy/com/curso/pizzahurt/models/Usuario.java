@@ -51,6 +51,7 @@ public class Usuario extends AbstractEntity implements UserDetails {
 
     private String apto;
 
+    @Digits(integer = 5, message = "El Código Postal deben ser 5 digitos", fraction = 0)
     private Integer codigoPostal;
 
     private String observaciones;
