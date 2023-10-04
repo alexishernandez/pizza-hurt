@@ -82,15 +82,7 @@ public class PizzaController {
 	 }
 	
 	 
-/*	 
-	 @PostMapping("/borrar") 
-	 public String borrarPizza(@Valid Pizza pizza, @ModelAttribute("carrito") CarritoDto carrito, 
-			 				    Errors errores, Model model) {
 
-		 return 
-	 }
-*/	 
-	 
 	 
 
 

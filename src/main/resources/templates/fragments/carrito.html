@@ -1,12 +1,12 @@
-<div th:fragment="formField (carrito)" class="card">
+<div th:fragment="formField (carrito)" class="card" >
 
-	<div class="card-body">
+	<div class="card-body m-1">
 
-		<h6 class="card-title">Carrito de Compra</h6>
+		<h6 class="card-header">Carrito de Compra</h6>
 
 		<p class="card-text" </p>
 			<div id="itemsCarrito">
-				<ul th:each="pizza : ${carrito} " class=" list-group fa-ul">
+				<ul th:each="pizza : ${carrito}" class=" list-group fa-ul">
 					<li>
 			
 						<span class="fa-li">
@@ -14,14 +14,6 @@
 						</span>
 						<span th:text="${pizza.nombre}"></span>
 
-						<form method="POST" th:action="@{/protected/carrito/delete/${pizza}}" th:object="${pizza}">
-
-					
-							<button class="btn">
-								<i class="fa fa-trash" aria-hidden="true"></i> 
-							</button>
-
-					    </form>
 						
 						
 					</li>

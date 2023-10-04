@@ -21,7 +21,8 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/protected/pedido/list}"> Mis Pedidos <span class="sr-only">(current)</span></a>
+					<a class="nav-link" th:href="@{/protected/pedido/list}"> Mis Pedidos <span
+							class="sr-only">(current)</span></a>
 				</li>
 			</ul>
 
@@ -35,14 +36,15 @@
 					<div class="nav-link active dropdown-toggle" data-bs-toggle="dropdown">
 						<a th:href="@{/protected/pedido/crear}" class="position-relative me-2 mt-1 link-light">
 							<i class="fa-solid fa-cart-shopping mt-1 me-1"></i>carrito
-							<span th:if="${#lists.size(carrito)}" th:text="${#lists.size(carrito)}" class="position-absolute position-absolute top-3 start-150 translate-middle badge rounded-pill bg-primary">
+							<span th:if="${#lists.size(carrito)}" th:text="${#lists.size(carrito)}"
+								class="position-absolute position-absolute top-3 start-150 translate-middle badge rounded-pill bg-primary">
 								<span class="visually-hidden">pizzas</span>
 							</span>
 						</a>
-<!--						<i class="fa-solid fa-cart-shopping"></i>-->
+						<!--						<i class="fa-solid fa-cart-shopping"></i>-->
 					</div>
 
-					<div class="dropdown-menu">
+					<div class="dropdown-menu dropdown-menu-end" style="width: 300px">
 						<div th:replace="~{fragments/carrito.html(carrito=${carrito})}"></div>
 					</div>
 
