@@ -78,14 +78,38 @@
                         <h5 class="card-title">Pizzas del Pedido</h5>
                         <div class="row align-items-center mt-2">
                             <div id="itemsPedido">
-                                <ul th:each="item : *{pizzas}" class=" list-group fa-ul">
-                                    <li>
-                                        <span class="fa-li">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Nombre Pizza</th>
+                                        <th scope="col">Masas</th>
+                                        <th scope="col">Salsas</th>
+                                        <th scope="col">Quesos</th>
+                                        <th scope="col">Toppings</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="item : *{pizzas}">
+                                        <td>
+
                                             <i class="fa-solid fa-pizza-slice" ></i>
-                                        </span>
-                                        <span th:text="${item.nombre}"></span>
-                                    </li>
-                                </ul>
+                                            <span th:text="${item.nombre}"></span>
+                                        </td>
+                                        <td>
+                                            <span th:each="ing,iter:${item.getMasa()}" th:text="!${iter.last} ? ${ing.nombre} + ',': ${ing.nombre}"></span>
+                                        </td>
+                                        <td>
+                                            <span th:each="ing,iter:${item.getSalsas()}" th:text="!${iter.last} ? ${ing.nombre} + ', ': ${ing.nombre}"></span>
+                                        </td>
+                                        <td>
+                                            <span th:each="ing,iter:${item.getQuesos()}" th:text="!${iter.last} ? ${ing.nombre} + ', ': ${ing.nombre}"></span>
+                                        </td>
+                                        <td>
+                                            <span th:each="ing,iter:${item.getToppings()}" th:text="!${iter.last} ? ${ing.nombre} + ', ': ${ing.nombre}"></span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

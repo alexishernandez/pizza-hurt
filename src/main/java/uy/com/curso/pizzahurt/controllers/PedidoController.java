@@ -39,6 +39,9 @@ public class PedidoController {
     @GetMapping("/crear")
     public String crearPedido(Model model, @ModelAttribute("carrito") CarritoDto carrito,
                               @AuthenticationPrincipal Usuario usuario) throws UsuarioNotFoundException {
+        if (usuario.getId()==null){
+            return "redirect:/login";
+        }
     	Pedido pedido = new Pedido();
         Usuario aux = usuarioService.find(usuario.getId());
         AppHelper.fillPedidoDireccionfromUsuario(pedido, aux);
@@ -57,18 +60,23 @@ public class PedidoController {
     public String guardarPedido(@Valid Pedido pedido, BindingResult result,
             @AuthenticationPrincipal Usuario usuario,@ModelAttribute("carrito") CarritoDto carrito, Model model,
             RedirectAttributes attributes) {
+        if (usuario.getId()==null){
+            return "redirect:/login";
+        }
         if (result.hasErrors()){
             return "editPedido";
-        }else{
-            pedido.setUsuario(usuario);
-            pedido.getPizzas().addAll(carrito);
-            pedidoService.crearPedido(pedido);
-            carrito.clear();
-            model.addAttribute("success","Actualización exitosa...");
-            attributes.addFlashAttribute("success", "Object has been add successfully.");
-
-            return "redirect:/protected/pedido/list";
         }
+        if(carrito.isEmpty()){
+            result.reject("mensaje_error","ERROR: No se han agregado pizzas al carrito");
+            return "editPedido";
+        }
+        pedido.setUsuario(usuario);
+        pedido.getPizzas().addAll(carrito);
+        pedidoService.crearPedido(pedido);
+        carrito.clear();
+        model.addAttribute("success","Actualización exitosa...");
+        attributes.addFlashAttribute("success", "Object has been add successfully.");
+        return "redirect:/protected/pedido/list";
     }
 
 
@@ -98,7 +106,12 @@ public class PedidoController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("exception",exception.getMessage());
         modelAndView.addObject("url", request.getRequestURL());
-        modelAndView.setViewName("error_old");
+        modelAndView.setViewName("error");
     return modelAndView ;
+    }
+
+    @ModelAttribute("carrito")
+    public CarritoDto carrito() {
+        return new CarritoDto();
     }
 }
