@@ -1,20 +1,31 @@
 <div th:fragment="formField (carrito)" class="card" >
 
-	<div class="card-body m-1">
+	<div class="card-body">
 
 		<h6 class="card-header">Carrito de Compra</h6>
 
 		<p class="card-text" </p>
 			<div id="itemsCarrito">
-				<ul th:each="pizza : ${carrito}" class=" list-group fa-ul">
-					<li>
+				<ul  class=" list-group fa-ul" >
+					<li class="list-group-item"  th:each="pizza : ${carrito}">
 			
 						<span class="fa-li">
-							<i class="fa-solid fa-pizza-slice"></i>
+							<i class="fa-solid fa-pizza-slice icono-pizza"></i>
 						</span>
 						<span th:text="${pizza.nombre}"></span>
-
+										
 						
+						<div  class="fw-lighter">
+								<span th:each="salsa, iterStat : ${pizza.salsas}" th:text="!${iterStat.last} ? ${salsa.nombre} + ', ': ${salsa.nombre} " />
+						</div>
+						
+						<div  class="fw-lighter">
+								<span th:each="queso, iterStat : ${pizza.quesos}" th:text="!${iterStat.last} ? ${queso.nombre} + ', ': ${queso.nombre} " />			
+						</div>
+						
+						<div class="fw-lighter">
+							<span th:each="topping, iterStat : ${pizza.toppings}" th:text="!${iterStat.last} ? ${topping.nombre} + ', ': ${topping.nombre} " />	
+						</div>											
 						
 					</li>
 				</ul>
