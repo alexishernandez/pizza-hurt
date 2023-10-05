@@ -18,7 +18,8 @@
 						<div class="card-body">
 							<div class="row align-items-center mt-lg-3">
 								<div class="col-8">
-									<div th:replace="~{fragments/campoDTO.html(field='nombre',descripcion='Nombra tu Pizza')}"/>
+									<div
+										th:replace="~{fragments/campoDTO.html(field='nombre',descripcion='Nombra tu Pizza')}" />
 								</div>
 							</div>
 							<div class="row align-items-center mt-2">
@@ -32,10 +33,12 @@
 							</div>
 							<div class="row align-items-center mt-lg-3">
 								<div id="salsas" class="col-10">
-									<label for="selSalsas">Elejí tus salsas: <span class="fw-lighter">(Puedes seleccionar mas de uno)</span></label>
-									<select id="selSalsas" class="form-select" th:field="*{salsas}"
-											th:classappend="${#fields.hasErrors('salsas')} ? 'is-invalid' : ''"
-											aria-describedby="validationSalsas" multiple >
+									<label for="selSalsas">Elejí tus salsas: 
+										<span class="fw-lighter">(Puedes
+											seleccionar mas de uno)</span></label>
+									<select id="selSalsas" class="form-select chosen-select" th:field="*{salsas}"
+										th:classappend="${#fields.hasErrors('salsas')} ? 'is-invalid' : ''"
+										aria-describedby="validationSalsas" multiple>
 										<option th:each="salsaPizza : ${allSalsas}" th:value="${salsaPizza.id}"
 											th:text="${salsaPizza.nombre}"></option>
 									</select>
@@ -47,10 +50,12 @@
 
 							<div class="row align-items-center mt-lg-3">
 								<div id="quesos" class="col-10">
-									<label for="selQuesos">Cubrila de Quesos: <span class="fw-lighter">(Puedes seleccionar mas de uno)</span></label>
+									<label for="selQuesos">Cubrila de Quesos: <span class="fw-lighter">(Puedes
+											seleccionar mas de uno)</span></label>
 									<select id="selQuesos" class="form-select" th:size="${#lists.size(allQuesos)}"
-											th:field="*{quesos}" th:classappend="${#fields.hasErrors('quesos')} ? 'is-invalid' : ''"
-											aria-describedby="validationQuesos" multiple>
+										th:field="*{quesos}"
+										th:classappend="${#fields.hasErrors('quesos')} ? 'is-invalid' : ''"
+										aria-describedby="validationQuesos" multiple>
 										<option th:each="quesosPizza : ${allQuesos}" th:value="${quesosPizza.id}"
 											th:text="${quesosPizza.nombre}"></option>
 									</select>
@@ -62,10 +67,12 @@
 
 							<div class="row align-items-center mt-lg-3">
 								<div id="toppings" class="col-10">
-									<label for="selToppings">Ponele tus Toppings: <span class="fw-lighter">(Puedes seleccionar mas de uno)</span></label>
+									<label for="selToppings">Ponele tus Toppings: <span class="fw-lighter">(Puedes
+											seleccionar mas de uno)</span></label>
 									<select id="selToppings" class="form-select" th:size="${#lists.size(allToppings)}"
-											th:field="*{toppings}" th:classappend="${#fields.hasErrors('toppings')} ? 'is-invalid' : ''"
-											aria-describedby="validationToppings"  multiple>
+										th:field="*{toppings}"
+										th:classappend="${#fields.hasErrors('toppings')} ? 'is-invalid' : ''"
+										aria-describedby="validationToppings" multiple>
 										<option th:each="toppingsPizza : ${allToppings}" th:value="${toppingsPizza.id}"
 											th:text="${toppingsPizza.nombre}"></option>
 									</select>
@@ -88,5 +95,17 @@
 
 	<footer th:replace="~{fragments/footer:: _footer}"></footer>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+
+	<script>
+
+$(document).ready(function () {
+	$("select").select2({
+	    theme: "bootstrap-5",
+	});
+});
+	</script>
+
+
 </body>
+
 </html>
