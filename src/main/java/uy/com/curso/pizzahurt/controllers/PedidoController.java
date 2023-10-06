@@ -4,10 +4,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -69,7 +71,7 @@ public class PedidoController {
             return "editPedido";
         }
         if(carrito.isEmpty()){
-            result.reject("mensaje_error","ERROR: No se han agregado pizzas al carrito");
+            result.reject("mensaje_error","No se han agregado pizzas al carrito");
             return "editPedido";
         }
         pedidoService.crearPedido(pedido);
@@ -114,5 +116,10 @@ public class PedidoController {
     @ModelAttribute("carrito")
     public CarritoDto carrito() {
         return new CarritoDto();
+    }
+
+    @InitBinder /* Convierte cadenas vacías en nulas cuando se envía un formulario */
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 }

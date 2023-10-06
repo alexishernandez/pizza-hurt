@@ -4,19 +4,19 @@ import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
 import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Target(TYPE)
+@Target(ElementType.FIELD)
 @Retention(RUNTIME)
-@Constraint(validatedBy = DomicilioPedidoValidator.class)
-public @interface DomicilioPedidoConstraint {
+@Constraint(validatedBy = VtoCreditCardValidator.class)
+public @interface VtoCreditCardConstraint {
 
-    String message() default "Faltan datos del Domicilio o no están completos";
+    String message() default "La tarjeta se encuentra vencida";
 
     Class<?>[] groups() default {};
 

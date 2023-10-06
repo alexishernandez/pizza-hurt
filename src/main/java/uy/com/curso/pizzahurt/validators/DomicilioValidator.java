@@ -2,8 +2,6 @@ package uy.com.curso.pizzahurt.validators;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import uy.com.curso.pizzahurt.dtos.DomicilioDto;
-import uy.com.curso.pizzahurt.dtos.UsuarioDto;
 import uy.com.curso.pizzahurt.models.Usuario;
 
 public class DomicilioValidator  implements ConstraintValidator<DomicilioConstraint, Usuario> {

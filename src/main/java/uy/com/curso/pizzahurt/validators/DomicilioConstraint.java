@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = DomicilioValidator.class)
 public @interface DomicilioConstraint {
 
-    String message() default "Error en Domicilio: Faltan datos o no están completos";
+    String message() default "Faltan datos del Domicilio o no están completos";
 
     Class<?>[] groups() default {};
 

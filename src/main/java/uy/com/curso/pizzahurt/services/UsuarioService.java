@@ -81,10 +81,14 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Transactional
-    public void updateUsuario(Usuario usuario){
+    public void updateUsuario(Usuario usuario) throws UsuarioNotFoundException {
         Usuario aux = usuarioRepository.findUsuarioByEmail(usuario.getEmail());
-        if(aux != null) usuario.setId(aux.getId());
-        usuarioRepository.save(usuario);
+        if(aux != null) {
+            usuario.setId(aux.getId());
+            usuario.setPassword(aux.getPassword());
+            usuarioRepository.save(usuario);
+        } else
+            throw new UsuarioNotFoundException("No se encontró el usuario para actualizar");
     }
 
     @Transactional

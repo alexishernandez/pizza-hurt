@@ -18,9 +18,10 @@
 
                     <form th:object="${usuario}" th:action="@{/protected/usuario/modificar}" method="post">
                         <div th:if="${#fields.hasErrors('global')}" th:class="${'status_message alert alert-danger'}">
-                            <span th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error fw-bold" />
+                            <ul class="my-0">
+                                <li th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error" />
+                            </ul>
                         </div>
-
                         <div class="card w-95">
                             <div class="card-body">
                                 <h5 class="card-title">Datos Personales</h5>
@@ -43,18 +44,7 @@
                                             <div class="form-check form-switch form-switch-lg">
                                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" th:field="*{activo}">
                                             </div>
-
-                                            <!--                                            <input th:field="*{activo}" hidden>-->
-<!--                                            <div class="alert" th:classappend="${ usuario.getActivo()? 'alert-success' : 'alert-danger'}"-->
-<!--                                                 role="alert" style="width: fit-content">-->
-<!--                                                <td th:text="*{activo} ? 'ACTIVO' : 'INACTIVO'"/>-->
-<!--                                            </div>-->
                                         </div>
-
-                                        <!--                                        <div class="form-group">-->
-<!--                                            <label>Activo:</label>-->
-<!--                                            <input type="checkbox" class="form-check-input" th:field="*{activo}">-->
-<!--                                        </div>-->
                                     </div>
                                 </div>
 
@@ -220,11 +210,9 @@
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label>Fecha de Vencimiento:</label>
-                                            <div class="col-4">
-                                                <input type="text" class="form-control" th:field="*{fechaVencimiento}"
-                                                        th:classappend="${#fields.hasErrors('fechaVencimiento')} ? 'is-invalid' : ''"
-                                                        aria-describedby="validationTarjetaFechaVencimiento">
-                                            </div>
+                                            <input type="text" class="form-control" th:field="*{fechaVencimiento}"
+                                                    th:classappend="${#fields.hasErrors('fechaVencimiento')} ? 'is-invalid' : ''"
+                                                    aria-describedby="validationTarjetaFechaVencimiento">
                                             <div id="validationTarjetaFechaVencimiento" class="invalid-feedback">
                                                 <p th:if="${#fields.hasErrors('fechaVencimiento')}" th:errors="*{fechaVencimiento}">Error</p>
                                             </div>
@@ -233,11 +221,9 @@
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label>Código CVV:</label>
-                                            <div class="col-4">
-                                                <input type="text" class="form-control" th:field="*{codigoCVV}"
-                                                       th:classappend="${#fields.hasErrors('codigoCVV')} ? 'is-invalid' : ''"
-                                                       aria-describedby="validationCodigoCVV">
-                                            </div>
+                                            <input type="text" class="form-control" th:field="*{codigoCVV}"
+                                                   th:classappend="${#fields.hasErrors('codigoCVV')} ? 'is-invalid' : ''"
+                                                   aria-describedby="validationCodigoCVV">
                                             <div id="validationCodigoCVV" class="invalid-feedback">
                                                 <p th:if="${#fields.hasErrors('codigoCVV')}" th:errors="*{codigoCVV}">Error</p>
                                             </div>

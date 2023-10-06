@@ -33,7 +33,7 @@
                                             <input type="text" class="form-control " th:field="*{nombreCompleto}"
                                                    th:classappend="${#fields.hasErrors('nombreCompleto')} ? 'is-invalid' : ''"
                                                    aria-describedby="validationNombre"/>
-                                            <div id="valida tionNombre" class="invalid-feedback">
+                                            <div id="validationNombre" class="invalid-feedback">
                                                 <p th:if="${#fields.hasErrors('nombreCompleto')}" th:errors="*{nombreCompleto}">Error ingredientes</p>
                                             </div>
                                         </div>

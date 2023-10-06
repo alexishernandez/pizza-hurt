@@ -3,10 +3,10 @@
         <label th:for="${#strings.toLowerCase(field)}"> <span
                 th:text="${descripcion}"></span>
         </label>
-        <input id="${#strings.toLowerCase(field)}" type="text" class="form-control" th:field="*{__${field}__}"
+        <input th:id="${#strings.toLowerCase(field)}"type="text" class="form-control" th:field="*{__${field}__}"
                th:classappend="${#fields.hasErrors('__${field}__')} ? 'is-invalid' : ''"
-               aria-describedby="validation${#strings.toLowerCase(field)}"/>
-        <div id="validation${#strings.toLowerCase(field)}" class="invalid-feedback">
+               th:attr="aria-describedby='validation'+${#strings.toLowerCase(field)}"/>
+        <div th:id="'validation'+${#strings.toLowerCase(field)}" class="invalid-feedback">
             <p th:if="${#fields.hasErrors('__${field}__')}" th:errors="*{__${field}__}">Error</p>
         </div>
 

@@ -1,15 +1,21 @@
 package uy.com.curso.pizzahurt.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import uy.com.curso.pizzahurt.dtos.UsuarioPasswordDto;
+import uy.com.curso.pizzahurt.exceptions.PedidoNotFoundException;
+import uy.com.curso.pizzahurt.exceptions.UsuarioNotFoundException;
 import uy.com.curso.pizzahurt.models.Usuario;
 import uy.com.curso.pizzahurt.services.UsuarioService;
 
@@ -35,7 +41,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/modificar")
-    public String guardarUsuario(@Valid Usuario usuario, BindingResult result, Model model) {
+    public String guardarUsuario(@Valid Usuario usuario, BindingResult result, Model model) throws UsuarioNotFoundException {
         log.info("Guardando usuario: " + usuario.toString());
 
         if (result.hasErrors()) {
@@ -73,5 +79,21 @@ public class UsuarioController {
             log.error("Se han encontraron errores en la contraseña actual...");
             result.rejectValue("passwordActual", "","Contraseña incorrecta");
             return "cambiarPassword";}
+    }
+
+
+    @ExceptionHandler({UsuarioNotFoundException.class})
+    public ModelAndView UsuarioNoEncontrado(HttpServletRequest request, Exception exception){
+        log.error("Request: "+request.getRequestURL() +" raised "+ exception);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("exception",exception.getMessage());
+        modelAndView.addObject("url", request.getRequestURL());
+        modelAndView.setViewName("error");
+        return modelAndView ;
+    }
+
+    @InitBinder /* Convierte cadenas vacías en nulas cuando se envía un formulario */
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 }

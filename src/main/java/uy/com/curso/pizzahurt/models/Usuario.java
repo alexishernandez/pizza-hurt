@@ -14,6 +14,7 @@ import uy.com.curso.pizzahurt.models.common.AbstractEntity;
 import uy.com.curso.pizzahurt.validators.DomicilioConstraint;
 import uy.com.curso.pizzahurt.validators.EmailUniqueConstraint;
 import uy.com.curso.pizzahurt.validators.TarjetaConstraint;
+import uy.com.curso.pizzahurt.validators.VtoCreditCardConstraint;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,7 +27,7 @@ import java.util.Collection;
 @TarjetaConstraint
 public class Usuario extends AbstractEntity implements UserDetails {
 
-    @NotNull
+    @NotNull(message = "El campo Nombre no puede estar vacío")
     @Size(min=3, max=20, message="El nombre debe tener como mínimo {min} y máximo {max} caracteres")
     private String nombreCompleto;
 
@@ -65,6 +66,7 @@ public class Usuario extends AbstractEntity implements UserDetails {
     private String nroTarjeta;
 
     @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([2-9][0-9])$", message="Fecha inválida, el formato correcto es: MM/YY")
+    @VtoCreditCardConstraint
     private String fechaVencimiento;
 
     @Pattern(regexp="^[0-9]{3}$", message="CódigoCVV invalido")

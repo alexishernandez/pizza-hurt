@@ -2,11 +2,14 @@ package uy.com.curso.pizzahurt.controllers;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import uy.com.curso.pizzahurt.dtos.RegistroDto;
@@ -51,12 +54,17 @@ public class RegistroController {
         try {
             usuarioService.createUsuarioByRegistroDto(registroDto);
         } catch (EmailAlreadyExistException e) {
-            result.reject("mensaje_error","Error: El e-mail ya se encuentra registrado...");
+            result.reject("mensaje_error","El e-mail ya se encuentra registrado...");
 //            model.addAttribute();
             return "registroUsuario";
         }
         model.addAttribute("mensaje","Usuario creado correctamente...");
         return "registroUsuario";
+    }
+
+    @InitBinder /* Convierte cadenas vacías en nulas cuando se envía un formulario */
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 
 }

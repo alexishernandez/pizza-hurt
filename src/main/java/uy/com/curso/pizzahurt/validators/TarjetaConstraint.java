@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = TarjetaValidator.class)
 public @interface TarjetaConstraint {
 
-    String message() default "Error en Tarjeta: Faltan datos o no están completos";
+    String message() default "Faltan datos del Método de Pago o no están completos";
 
     Class<?>[] groups() default {};
 
