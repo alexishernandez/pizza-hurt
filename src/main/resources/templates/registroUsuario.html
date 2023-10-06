@@ -15,9 +15,11 @@
                     <div th:if="${mensaje}" th:text="${mensaje}" th:class="${'alert alert-success'}"/>
 
                     <form th:object="${registroDto}" th:action="@{/registrarUsuario}" method="post">
+
                         <div th:if="${#fields.hasErrors('global')}" th:class="${'status_message alert alert-danger'}">
                             <span th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error fw-bold" />
                         </div>
+
                         <div th:if="${#fields.hasErrors('passwordValidar')}" th:class="${'status_message alert alert-danger'}">
                             <span th:each="err : ${#fields.errors('passwordValidar')}" th:text="${err}" class="error fw-bold" />
                         </div>

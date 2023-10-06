@@ -2,8 +2,6 @@ $(".status_message").delay(4000).slideUp(200, function() {
     $(this).alert('close');
 });
 
-/*
-
 $('#password').password({
     closestSelector: '.form-group',
     shortPass: 'La contraseña es muy corta',
@@ -77,7 +75,6 @@ icon_password.on('click', function (event) {
     }
 });
 
-*/
 
 /*$(document).ready(function () {
 	$('.chosen-select').chosen();

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 import uy.com.curso.pizzahurt.dtos.PedidoDto;
 import uy.com.curso.pizzahurt.dtos.RegistroDto;
+import uy.com.curso.pizzahurt.dtos.RegistroRestDto;
 import uy.com.curso.pizzahurt.models.Pedido;
 import uy.com.curso.pizzahurt.models.Pizza;
 import uy.com.curso.pizzahurt.models.Usuario;
@@ -34,6 +35,14 @@ public  class AppHelper {
         usuario.setTelefono(registroDto.getTelefono());
         usuario.setEmail(registroDto.getEmail());
         usuario.setPassword(encoder.encode(registroDto.getPassword()));
+    }
+
+    public static void fillUsuarioFromRegistroRestDto(RegistroRestDto registro, Usuario usuario){
+        usuario.setNombreCompleto(registro.getNombreCompleto());
+        usuario.setActivo(true);
+        usuario.setTelefono(registro.getTelefono());
+        usuario.setEmail(registro.getEmail());
+        usuario.setPassword(encoder.encode(registro.getPassword()));
     }
 
     public static void fillPedidoDtofromPedido(PedidoDto pedidoDto, Pedido pedido){

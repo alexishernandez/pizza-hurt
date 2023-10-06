@@ -4,11 +4,13 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import uy.com.curso.pizzahurt.dtos.RegistroDto;
+import uy.com.curso.pizzahurt.exceptions.EmailAlreadyExistException;
 import uy.com.curso.pizzahurt.models.Usuario;
 import uy.com.curso.pizzahurt.services.UsuarioService;
 
@@ -42,18 +44,19 @@ public class RegistroController {
     }
 
     @PostMapping("/registrarUsuario")
-    public String agregarUsuario(@Valid RegistroDto registroDto, Errors errores, Model model) {
+    public String agregarUsuario(@Valid RegistroDto registroDto, BindingResult result, Model model) {
         model.addAttribute("registroDto",registroDto);
-        if (errores.hasErrors()) {
-            log.error("Se encontraron errores al validar: {}", errores.getAllErrors());
+        if (result.hasErrors()) {
+            log.error("Se encontraron errores al validar: {}", result.getAllErrors());
             return "registroUsuario";
         }
-        if (usuarioService.existsUsuarioByEmail(registroDto.getEmail())){
-            log.error("Error: El e-mail ya se encuentra registrado...");
-            model.addAttribute("mensaje_error","Error: El e-mail ya se encuentra registrado...");
+        try {
+            usuarioService.createUsuarioByRegistroDto(registroDto);
+        } catch (EmailAlreadyExistException e) {
+            result.reject("mensaje_error","Error: El e-mail ya se encuentra registrado...");
+//            model.addAttribute();
             return "registroUsuario";
         }
-        usuarioService.createUsuarioByRegistroDto(registroDto);
         model.addAttribute("mensaje","Usuario creado correctamente...");
         return "registroUsuario";
     }

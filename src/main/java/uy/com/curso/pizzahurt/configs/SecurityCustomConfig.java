@@ -59,6 +59,7 @@ public class SecurityCustomConfig {
                 )
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers(toH2Console())
+                        .ignoringRequestMatchers(mvc.pattern("/api/**"))
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")

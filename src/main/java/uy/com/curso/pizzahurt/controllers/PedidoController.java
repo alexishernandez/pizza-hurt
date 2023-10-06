@@ -60,6 +60,8 @@ public class PedidoController {
     public String guardarPedido(@Valid Pedido pedido, BindingResult result,
             @AuthenticationPrincipal Usuario usuario,@ModelAttribute("carrito") CarritoDto carrito, Model model,
             RedirectAttributes attributes) {
+        pedido.setUsuario(usuario);
+        pedido.getPizzas().addAll(carrito);
         if (usuario.getId()==null){
             return "redirect:/login";
         }
@@ -70,18 +72,17 @@ public class PedidoController {
             result.reject("mensaje_error","ERROR: No se han agregado pizzas al carrito");
             return "editPedido";
         }
-        pedido.setUsuario(usuario);
-        pedido.getPizzas().addAll(carrito);
         pedidoService.crearPedido(pedido);
         carrito.clear();
         model.addAttribute("success","Actualización exitosa...");
-        attributes.addFlashAttribute("success", "Object has been add successfully.");
+        attributes.addFlashAttribute("success", "Pedido guardado exitosamente.");
         return "redirect:/protected/pedido/list";
     }
 
 
     @GetMapping("/show")
     public String showPedido(Model model, @RequestParam(name="id") Long id, @AuthenticationPrincipal Usuario usuario) throws PedidoNotFoundException {
+
         Pedido pedido =pedidoService.find(id);
         if (pedido.getUsuario().getId().equals(usuario.getId())) {
             model.addAttribute("pedido", pedido);

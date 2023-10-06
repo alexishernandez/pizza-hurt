@@ -1,5 +1,6 @@
 package uy.com.curso.pizzahurt.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,7 +8,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import uy.com.curso.pizzahurt.dtos.CredencialDto;
 import uy.com.curso.pizzahurt.dtos.RegistroDto;
+import uy.com.curso.pizzahurt.dtos.RegistroRestDto;
+import uy.com.curso.pizzahurt.exceptions.EmailAlreadyExistException;
 import uy.com.curso.pizzahurt.exceptions.PedidoNotFoundException;
 import uy.com.curso.pizzahurt.exceptions.UsuarioNotFoundException;
 import uy.com.curso.pizzahurt.helpers.AppHelper;
@@ -16,6 +20,7 @@ import uy.com.curso.pizzahurt.repositories.UsuarioRepository;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class UsuarioService implements UserDetailsService {
 
@@ -48,13 +53,30 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Transactional
-    public Usuario createUsuarioByRegistroDto(RegistroDto registroDto){
+    public Usuario createUsuarioByRegistroDto(RegistroDto registroDto) throws EmailAlreadyExistException {
+
+        if (usuarioRepository.existsUsuarioByEmail(registroDto.getEmail())){
+            log.error("Error: El e-mail ya se encuentra registrado...");
+            throw new EmailAlreadyExistException("El e-mail ya se encuentra registrado..");
+        }
         Usuario usuario = new Usuario();
         AppHelper.fillUsuarioFromRegistroDto(registroDto,usuario);
         usuario.setNombreCompleto(registroDto.getNombreCompleto());
         usuario.setEmail(registroDto.getEmail());
         usuario.setTelefono(registroDto.getTelefono());
 
+        usuario = usuarioRepository.save(usuario);
+        return usuario;
+    }
+
+    @Transactional
+    public Usuario createUsuarioByRegistroRestDto(RegistroRestDto registro) throws EmailAlreadyExistException {
+        if (usuarioRepository.existsUsuarioByEmail(registro.getEmail())){
+            log.error("Error: El e-mail ya se encuentra registrado...");
+            throw new EmailAlreadyExistException("El e-mail ya se encuentra registrado..");
+        }
+        Usuario usuario = new Usuario();
+        AppHelper.fillUsuarioFromRegistroRestDto(registro,usuario);
         usuario = usuarioRepository.save(usuario);
         return usuario;
     }
@@ -85,6 +107,15 @@ public class UsuarioService implements UserDetailsService {
     }
 
     //Consultas
+
+    public boolean validUsernameAndPassword(CredencialDto credencialDto){
+        Usuario usuario = usuarioRepository.findUsuarioByEmail(credencialDto.getUsername());
+        if (usuario != null){
+            return encoder.matches(credencialDto.getPassword(),usuario.getPassword());
+        } else{
+            return false;
+        }
+    }
 
     public boolean comparePasswordWithUserPassword(String password, Usuario usuario) {
         System.out.println("El valor de password es: "+ password);
