@@ -24,7 +24,7 @@
                         <div class="card w-95">
                             <div class="card-body">
                                 <h5 class="card-title">Datos Personales</h5>
-                                <div class="row align-items-center">
+                                <div class="row align-items-center mt-2">
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Nombre Completo:</label>
@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row align-items-center">
+                                <div class="row align-items-center mt-2">
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Email:</label>
@@ -90,7 +90,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Domicilio</h5>
 
-                                <div class="row align-items-center">
+                                <div class="row align-items-center mt-2">
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Ciudad:</label>
@@ -126,7 +126,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row align-items-center">
+                                <div class="row align-items-center mt-2 ">
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Calle:</label>
@@ -161,7 +161,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row align-items-center">
+                                <div class="row align-items-center mt-2">
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Observaciones:</label>
@@ -180,8 +180,34 @@
                             <div class="card-body">
                                 <h5 class="card-title">Método de Pago</h5>
                                 <div class="row align-items-center">
-                                    <div class="col">
-                                        <div class="form-group col-6 pl-0">
+                                        <div class="col-5">
+                                            <div class="form-group">
+                                                <label>Nombre del Titular:</label>
+                                                <input type="text" class="form-control" th:field="*{nombreTarjeta}"
+                                                       th:classappend="${#fields.hasErrors('nombreTarjeta')} ? 'is-invalid' : ''"
+                                                       aria-describedby="validationNombreTarjeta">
+                                                <div id="validationNombreTarjeta" class="invalid-feedback">
+                                                    <p th:if="${#fields.hasErrors('nombreTarjeta')}" th:errors="*{nroTarjeta}">Error</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="form-group">
+                                                <label>Número de Tarjeta:</label>
+                                                <input type="text" class="form-control" th:field="*{nroTarjeta}"
+                                                       th:classappend="${#fields.hasErrors('nroTarjeta')} ? 'is-invalid' : ''"
+                                                       aria-describedby="validationNroTarjeta">
+                                                <div id="validationNroTarjeta" class="invalid-feedback">
+                                                    <p th:if="${#fields.hasErrors('nroTarjeta')}" th:errors="*{nroTarjeta}">Error</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                </div>
+
+                                <div class="row align-items-center  mt-2">
+                                    <div class="col-5">
+                                        <div class="form-group pl-0">
                                             <label>Emisor:</label>
                                             <input type="text" class="form-control" th:field="*{emisor}"
                                                    th:classappend="${#fields.hasErrors('emisor')} ? 'is-invalid' : ''"
@@ -191,49 +217,39 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label>Número de Tarjeta:</label>
-                                            <input type="text" class="form-control" th:field="*{nroTarjeta}"
-                                                   th:classappend="${#fields.hasErrors('nroTarjeta')} ? 'is-invalid' : ''"
-                                                   aria-describedby="validationTarjeta">
-                                            <div id="validationTarjeta" class="invalid-feedback">
-                                                <p th:if="${#fields.hasErrors('nroTarjeta')}" th:errors="*{nroTarjeta}">Error</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label>Fecha de Vencimiento:</label>
-                                            <input type="text" class="form-control" th:field="*{fechaVencimiento}"
-                                                   th:classappend="${#fields.hasErrors('fechaVencimiento')} ? 'is-invalid' : ''"
-                                                   aria-describedby="validationTarjetaFechaVencimiento">
+                                            <div class="col-4">
+                                                <input type="text" class="form-control" th:field="*{fechaVencimiento}"
+                                                        th:classappend="${#fields.hasErrors('fechaVencimiento')} ? 'is-invalid' : ''"
+                                                        aria-describedby="validationTarjetaFechaVencimiento">
+                                            </div>
                                             <div id="validationTarjetaFechaVencimiento" class="invalid-feedback">
                                                 <p th:if="${#fields.hasErrors('fechaVencimiento')}" th:errors="*{fechaVencimiento}">Error</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label>Código CVV:</label>
-                                            <input type="text" class="form-control" th:field="*{codigoCVV}"
-                                                   th:classappend="${#fields.hasErrors('codigoCVV')} ? 'is-invalid' : ''"
-                                                   aria-describedby="validationCodigoCVV">
+                                            <div class="col-4">
+                                                <input type="text" class="form-control" th:field="*{codigoCVV}"
+                                                       th:classappend="${#fields.hasErrors('codigoCVV')} ? 'is-invalid' : ''"
+                                                       aria-describedby="validationCodigoCVV">
+                                            </div>
                                             <div id="validationCodigoCVV" class="invalid-feedback">
                                                 <p th:if="${#fields.hasErrors('codigoCVV')}" th:errors="*{codigoCVV}">Error</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col col-md-5 offset-md-5">
-                                        <button type="submit" class="btn btn-primary">Modificar Datos</button>
-                                        <a th:href="@{/protected/home}"  class="btn btn-secondary" role="button">Volver</a>
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col col-md-5 offset-md-5">
+                                <button type="submit" class="btn btn-primary">Modificar Datos</button>
+                                <a th:href="@{/protected/home}"  class="btn btn-secondary" role="button">Volver</a>
                             </div>
                         </div>
                     </form>

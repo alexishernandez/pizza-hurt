@@ -1,0 +1,14 @@
+<div th:fragment="campoDTO(field, descripcion)" class="form-group">
+
+        <label th:for="${#strings.toLowerCase(field)}"> <span
+                th:text="${descripcion}"></span>
+        </label>
+        <div class="col-4">
+                <input id="${#strings.toLowerCase(field)}" type="text" class="form-control" th:field="*{__${field}__}"
+                       th:classappend="${#fields.hasErrors('__${field}__')} ? 'is-invalid' : ''"
+                       aria-describedby="validation${#strings.toLowerCase(field)}"/>
+        </div>
+        <div id="validation${#strings.toLowerCase(field)}" class="invalid-feedback">
+            <p th:if="${#fields.hasErrors('__${field}__')}" th:errors="*{__${field}__}">Error</p>
+        </div>
+</div>

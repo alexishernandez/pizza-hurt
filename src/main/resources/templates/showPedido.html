@@ -56,19 +56,22 @@
                     <div class="card-body">
                         <h5 class="card-title">Datos de Pago</h5>
                         <div class="row align-items-center mt-2">
-                            <div class="col-6">
-                                <div th:replace="~{fragments/campoDTO_readonly.html(field='emisor', descripcion='Emisor')}"></div>
+                            <div class="col-5">
+                                <div th:replace="~{fragments/campoDTO_readonly.html(field='nombreTarjeta', descripcion='Nombre del Titular')}"></div>
+                            </div>
+                            <div class="col-5">
+                                <div th:replace="~{fragments/campoDTO_readonly.html(field='nroTarjeta', descripcion='Número de Tarjeta')}"></div>
                             </div>
                         </div>
                         <div class="row align-items-center mt-2">
-                            <div class="col-6">
-                                <div th:replace="~{fragments/campoDTO_readonly.html(field='nroTarjeta', descripcion='Numero de Tarjeta')}"></div>
+                            <div class="col-5">
+                                <div th:replace="~{fragments/campoDTO_readonly.html(field='emisor', descripcion='Emisor')}"></div>
                             </div>
                             <div class="col-3">
-                                <div th:replace="~{fragments/campoDTO_readonly.html(field='fechaVencimiento', descripcion='Fecha de Vencimiento')}"></div>
+                                <div th:replace="~{fragments/campoDTO_col4_readonly.html(field='fechaVencimiento', descripcion='Fecha de Vencimiento')}"></div>
                             </div>
                             <div class="col-3">
-                                <div th:replace="~{fragments/campoDTO_readonly.html(field='codigoCVV', descripcion='CVV')}"></div>
+                                <div th:replace="~{fragments/campoDTO_col4_readonly.html(field='codigoCVV', descripcion='CVV')}"></div>
                             </div>
                         </div>
                     </div>
@@ -91,7 +94,6 @@
                                     <tbody>
                                     <tr th:each="item : *{pizzas}">
                                         <td>
-
                                             <i class="fa-solid fa-pizza-slice" ></i>
                                             <span th:text="${item.nombre}"></span>
                                         </td>
@@ -119,9 +121,10 @@
                         <a th:href="@{/protected/pedido/list}"  class="btn btn-secondary" role="button">Volver</a>
                     </div>
                 </div>
-<!--            </form>-->
+            </form>
         </div>
     </div>
+</div>
 
 
 <footer th:replace="fragments/footer:: _footer"></footer>

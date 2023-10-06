@@ -22,37 +22,37 @@
 					<div class="card w-95">
 						<div class="card-body">
 							<h5 class="card-title">Datos de Entrega</h5>
-							<div class="row align-items-center">
+							<div class="row align-items-center mt-2">
 								<div class="col-6">
-									<div th:replace="~{fragments/campoDTO.html(field='nombreReceptor',	descripcion='Nombre del Receptor')}"></div>
+									<div th:replace="~{fragments/campoDTO.html(field='nombreReceptor',	descripcion='Nombre del Receptor:')}"></div>
 								</div>
 							</div>
-							<div class="row align-items-center">
+							<div class="row align-items-center mt-2">
 								<div class="col-5">
-									<div th:replace="~{fragments/campoDTO.html(field='ciudad', descripcion='ciudad')}"></div>
+									<div th:replace="~{fragments/campoDTO.html(field='ciudad', descripcion='Ciudad:')}"></div>
 								</div>
 								<div class="col-5">
-									<div th:replace="~{fragments/campoDTO.html(field='barrio', descripcion='Barrio')}"></div>
+									<div th:replace="~{fragments/campoDTO.html(field='barrio', descripcion='Barrio:')}"></div>
 								</div>
 								<div class="col-2">
-									<div th:replace="~{fragments/campoDTO.html(field='codigoPostal', descripcion='Código Postal')}"></div>
+									<div th:replace="~{fragments/campoDTO.html(field='codigoPostal', descripcion='Código Postal:')}"></div>
 								</div>
 
 							</div>
-							<div class="row align-items-center">
+							<div class="row align-items-center mt-2">
 								<div class="col-8">
-									<div th:replace="~{fragments/campoDTO.html(field='calle', descripcion='Calle')}"></div>
+									<div th:replace="~{fragments/campoDTO.html(field='calle', descripcion='Calle:')}"></div>
 								</div>
 								<div class="col-2">
-									<div th:replace="~{fragments/campoDTO.html(field='nroPuerta', descripcion='Numero de Puerta')}"></div>
+									<div th:replace="~{fragments/campoDTO.html(field='nroPuerta', descripcion='Número de Puerta:')}"></div>
 								</div>
 								<div class="col-2">
-									<div th:replace="~{fragments/campoDTO.html(field='apto', descripcion='Apartamento')}"></div>
+									<div th:replace="~{fragments/campoDTO.html(field='apto', descripcion='Apartamento:')}"></div>
 								</div>
 							</div>
-							<div class="row align-items-center">
+							<div class="row align-items-center mt-2">
 								<div class="col-12">
-									<div th:replace="~{fragments/campoDTO.html(field='observaciones', descripcion='Observaciones')}"></div>
+									<div th:replace="~{fragments/campoDTO.html(field='observaciones', descripcion='Observaciones:')}"></div>
 								</div>
 							</div>
 						</div>
@@ -60,20 +60,23 @@
 					<div class="card w-95 mt-2">
 						<div class="card-body">
 							<h5 class="card-title">Datos de Pago</h5>
-							<div class="row align-items-center">
-								<div class="col-6">
-									<div th:replace="~{fragments/campoDTO.html(field='emisor', descripcion='Emisor')}"></div>
+							<div class="row align-items-center mt-2">
+								<div class="col-5">
+									<div th:replace="~{fragments/campoDTO.html(field='nombreTarjeta', descripcion='Nombre del Titular:')}"></div>
+								</div>
+								<div class="col-5">
+									<div th:replace="~{fragments/campoDTO.html(field='nroTarjeta', descripcion='Numero de Tarjeta:')}"></div>
 								</div>
 							</div>
-							<div class="row align-items-center">
-								<div class="col-6">
-									<div th:replace="~{fragments/campoDTO.html(field='nroTarjeta', descripcion='Numero de Tarjeta')}"></div>
+							<div class="row align-items-center mt-2">
+								<div class="col-5">
+									<div th:replace="~{fragments/campoDTO.html(field='emisor', descripcion='Emisor:')}"></div>
 								</div>
 								<div class="col-3">
-									<div th:replace="~{fragments/campoDTO.html(field='fechaVencimiento', descripcion='Fecha de Vencimiento')}"></div>
+									<div th:replace="~{fragments/campoDTO_col4.html(field='fechaVencimiento', descripcion='Fecha de Vencimiento:')}"></div>
 								</div>
 								<div class="col-3">
-									<div th:replace="~{fragments/campoDTO.html(field='codigoCVV', descripcion='CVV')}"></div>
+									<div th:replace="~{fragments/campoDTO_col4.html(field='codigoCVV', descripcion='CVV:')}"></div>
 								</div>
 							</div>
 						</div>
@@ -96,8 +99,7 @@
 										<tbody>
 										<tr th:each="item : *{pizzas}">
 											<td>
-
-													<i class="fa-solid fa-pizza-slice" ></i>
+												<i class="fa-solid fa-pizza-slice" ></i>
 												<span th:text="${item.nombre}"></span>
 											</td>
 											<td>

@@ -1,0 +1,11 @@
+<div th:fragment="formField (field, descripcion)" class="form-group">
+    <div>
+        <label th:for="${#strings.toLowerCase(field)}"> <span
+            th:text="${descripcion}"></span>
+        </label>
+    </div>
+    <div class="col-4">
+        <input id="${#strings.toLowerCase(field)}" type="text" 
+        	   class="form-control" th:field="*{__${field}__}" readonly disabled>
+    </div>
+</div>

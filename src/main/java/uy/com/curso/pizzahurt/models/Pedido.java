@@ -70,6 +70,9 @@ public class Pedido extends AbstractEntity {
     private String emisor;
 
     @NotNull
+    private String nombreTarjeta;
+
+    @NotNull
     @CreditCardNumber(message="El nro de tarjeta no es válido")
     private String nroTarjeta;
 

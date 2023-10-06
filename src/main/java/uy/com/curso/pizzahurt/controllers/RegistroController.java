@@ -26,13 +26,11 @@ public class RegistroController {
 
     @GetMapping("/")
     public String index() {
-        return "login";
+        return "redirect:login";
     }
 
     @GetMapping("/login")
     public String login(@RequestParam(value = "error",defaultValue = "false") boolean loginError ) {
-        if (loginError){
-        }
         return "login";
     }
 

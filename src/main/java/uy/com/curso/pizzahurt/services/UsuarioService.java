@@ -9,11 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uy.com.curso.pizzahurt.dtos.CredencialDto;
+import uy.com.curso.pizzahurt.dtos.MedioPagoDto;
 import uy.com.curso.pizzahurt.dtos.RegistroDto;
 import uy.com.curso.pizzahurt.dtos.RegistroRestDto;
-import uy.com.curso.pizzahurt.exceptions.EmailAlreadyExistException;
-import uy.com.curso.pizzahurt.exceptions.PedidoNotFoundException;
-import uy.com.curso.pizzahurt.exceptions.UsuarioNotFoundException;
+import uy.com.curso.pizzahurt.exceptions.*;
 import uy.com.curso.pizzahurt.helpers.AppHelper;
 import uy.com.curso.pizzahurt.models.Usuario;
 import uy.com.curso.pizzahurt.repositories.UsuarioRepository;
@@ -108,7 +107,7 @@ public class UsuarioService implements UserDetailsService {
 
     //Consultas
 
-    public boolean validUsernameAndPassword(CredencialDto credencialDto){
+    public boolean validUsernameAndPassword(CredencialDto credencialDto) {
         Usuario usuario = usuarioRepository.findUsuarioByEmail(credencialDto.getUsername());
         if (usuario != null){
             return encoder.matches(credencialDto.getPassword(),usuario.getPassword());
@@ -135,5 +134,37 @@ public class UsuarioService implements UserDetailsService {
         return usuarioRepository.existsUsuarioByEmail(email);
     }
 
+    @Transactional
+    public void addMedioPagoByEmail(String email,MedioPagoDto medioPagoDto) throws UsuarioNotFoundException, MedioPagoAlreadyExistException {
+        Usuario usuario = usuarioRepository.findUsuarioByEmail(email);
+        if ( usuario != null){
+            if (usuario.getNroTarjeta() == null || usuario.getNroTarjeta().isEmpty()) {
+                AppHelper.fillUsuarioFromMedioPago(medioPagoDto,usuario);
+                usuarioRepository.save(usuario);
+            } else{
+                log.error("Ya existe un medio de pago asociado al usuario");
+                throw new MedioPagoAlreadyExistException("Ya existe un medio de pago asociado al usuario");
+            }
+        } else{
+            log.error("No se encontró usuario registrado el email");
+            throw new UsuarioNotFoundException("No se encontró usuario registrado para el email");
+        }
+    }
 
+    public MedioPagoDto getMedioPagoByEmail(String email) throws UsuarioNotFoundException, NotFoundMetodoPagoException {
+        MedioPagoDto medioPagoDto= new MedioPagoDto();
+        Usuario usuario = usuarioRepository.findUsuarioByEmail(email);
+        if(usuario != null){
+            if (usuario.getNroTarjeta() != null) {
+                AppHelper.fillMedioPagoDtoFromUsuario(usuario,medioPagoDto);
+                return medioPagoDto;
+            } else{
+                log.error("El usuario no tiene un Medio de Pago asociado");
+                throw new NotFoundMetodoPagoException("El usuario no tiene un Medio de Pago asociado");
+            }
+        } else{
+            log.error("No se encontró usuario registrado el email");
+            throw new UsuarioNotFoundException("No se encontró usuario registrado para el email");
+        }
+    }
 }

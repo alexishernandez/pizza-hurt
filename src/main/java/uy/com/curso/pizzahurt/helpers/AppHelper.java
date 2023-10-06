@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
+import uy.com.curso.pizzahurt.dtos.MedioPagoDto;
 import uy.com.curso.pizzahurt.dtos.PedidoDto;
 import uy.com.curso.pizzahurt.dtos.RegistroDto;
 import uy.com.curso.pizzahurt.dtos.RegistroRestDto;
@@ -78,10 +79,26 @@ public  class AppHelper {
       pedido.setObservaciones(usuario.getObservaciones());
     }
 
+    public static void fillUsuarioFromMedioPago(MedioPagoDto medioPagoDto, Usuario usuario){
+        usuario.setEmisor(medioPagoDto.getEmisor());
+        usuario.setNroTarjeta(medioPagoDto.getNroTarjeta());
+        usuario.setFechaVencimiento(medioPagoDto.getFechaVencimiento());
+        usuario.setCodigoCVV(medioPagoDto.getCodigoCVV());
+    }
+
     public static void fillPedidoMetodoPagofromUsuario(Pedido pedido,Usuario usuario){
         pedido.setEmisor(usuario.getEmisor());
+        pedido.setNombreTarjeta(usuario.getNombreTarjeta());
         pedido.setNroTarjeta(usuario.getNroTarjeta());
         pedido.setFechaVencimiento(usuario.getFechaVencimiento());
         pedido.setCodigoCVV(usuario.getCodigoCVV());
+    }
+
+    public static void fillMedioPagoDtoFromUsuario(Usuario usuario, MedioPagoDto medioPagoDto) {
+        medioPagoDto.setEmisor(usuario.getEmisor());
+        medioPagoDto.setNombreTarjeta(usuario.getNombreTarjeta());
+        medioPagoDto.setNroTarjeta(usuario.getNroTarjeta());
+        medioPagoDto.setFechaVencimiento(usuario.getFechaVencimiento());
+        medioPagoDto.setCodigoCVV(usuario.getCodigoCVV());
     }
 }
