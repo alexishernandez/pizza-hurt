@@ -24,7 +24,7 @@
 							</div>
 							<div class="row align-items-center mt-2">
 								<div id="masas" class="col-10">
-									<label>Eleji tu Masa:</label>
+									<label>Elejí tu Masa:</label>
 									<select id="selMasa" class="form-select" th:field="*{masa}">
 										<option th:each="masaPizza : ${allMasas}" th:value="${masaPizza.id}"
 											th:text="${masaPizza.nombre}"></option>
