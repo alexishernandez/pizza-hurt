@@ -1,6 +1,9 @@
 package uy.com.curso.pizzahurt.controllers;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,17 +76,17 @@ public class PizzaController {
             log.error("Se encontraron errores al validar la pizza: {}", errores.getAllErrors());
             return "editPizza";
         } else  {
+			// Se agrega un identificador temporal para el carrito
+			Optional<Pizza> ultima = carrito.stream().max(Comparator.comparing(Pizza::getId));
+			if (ultima.isPresent()) {
+				pizza.setId(ultima.get().getId()+1);
+			}else{
+				pizza.setId(1L);
+			}
         	carrito.add(pizza);
 			model.addAttribute("success","Pizza creada exitosamente.");
 	        return "editPizza";
-
         }
 		 
 	 }
-	
-	 
-
-	 
-
-
 }

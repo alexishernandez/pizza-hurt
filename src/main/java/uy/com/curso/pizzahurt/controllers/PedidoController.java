@@ -29,10 +29,10 @@ import uy.com.curso.pizzahurt.services.PedidoService;
 import uy.com.curso.pizzahurt.services.UsuarioService;
 
 @Slf4j
-@RequestMapping("/protected/pedido")
 @Controller
 @RequiredArgsConstructor
 @SessionAttributes("carrito")
+@RequestMapping("/protected/pedido")
 public class PedidoController {
 
     private final PedidoService pedidoService;
@@ -58,11 +58,20 @@ public class PedidoController {
         return ("editPedido");
     }
 
+    @GetMapping("/quitarPizza")
+    public String quitarPizzaCarrito(@ModelAttribute("carrito") CarritoDto carrito,@RequestParam(name = "id") Long id){
+        log.info("entro en quitarPizzaCarrito: "+id);
+        carrito.removeIf(pizza -> id.equals(pizza.getId()));
+        return "redirect:/protected/home";
+    }
+
     @PostMapping("/guardar")
     public String guardarPedido(@Valid Pedido pedido, BindingResult result,
             @AuthenticationPrincipal Usuario usuario,@ModelAttribute("carrito") CarritoDto carrito, Model model,
             RedirectAttributes attributes) {
         pedido.setUsuario(usuario);
+        //Quito un identificador temporal
+        carrito.forEach(pizza -> pizza.setId(null));
         pedido.getPizzas().addAll(carrito);
         if (usuario.getId()==null){
             return "redirect:/login";

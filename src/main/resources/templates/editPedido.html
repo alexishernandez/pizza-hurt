@@ -83,46 +83,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="card w-95 mt-2">
-						<div class="card-body">
-							<h5 class="card-title">Pizzas del Pedido</h5>
-							<div class="row align-items-center">
-								<div id="itemsPedido">
-									<table class="table">
-										<thead>
-										<tr>
-											<th scope="col">Nombre Pizza</th>
-											<th scope="col">Masas</th>
-											<th scope="col">Salsas</th>
-											<th scope="col">Quesos</th>
-											<th scope="col">Toppings</th>
-										</tr>
-										</thead>
-										<tbody>
-										<tr th:each="item : *{pizzas}">
-											<td>
-												<i class="fa-solid fa-pizza-slice" ></i>
-												<span th:text="${item.nombre}"></span>
-											</td>
-											<td>
-												<span th:each="ing,iter:${item.getMasa()}" th:text="!${iter.last} ? ${ing.nombre} + ',': ${ing.nombre}"></span>
-											</td>
-											<td>
-												<span th:each="ing,iter:${item.getSalsas()}" th:text="!${iter.last} ? ${ing.nombre} + ', ': ${ing.nombre}"></span>
-											</td>
-											<td>
-												<span th:each="ing,iter:${item.getQuesos()}" th:text="!${iter.last} ? ${ing.nombre} + ', ': ${ing.nombre}"></span>
-											</td>
-											<td>
-												<span th:each="ing,iter:${item.getToppings()}" th:text="!${iter.last} ? ${ing.nombre} + ', ': ${ing.nombre}"></span>
-											</td>
-										</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
+					<div th:replace="~{fragments/pizzaList}"></div>
 					<div class="row mt-2">
 						<div class="col col-md-5 offset-md-5">
 							<button type="submit" class="btn btn-primary">Confirmar Pedido</button>

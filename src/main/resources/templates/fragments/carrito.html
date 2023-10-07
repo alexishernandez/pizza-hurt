@@ -4,17 +4,19 @@
 
 		<h6 class="card-header">Carrito de Compra</h6>
 
-		<p class="card-text" </p>
+		<p class="card-text">
 			<div id="itemsCarrito">
 				<ul  class=" list-group fa-ul" >
 					<li class="list-group-item"  th:each="pizza : ${carrito}">
 			
 						<span class="fa-li">
-							<i class="fa-solid fa-pizza-slice icono-pizza"></i>
+							<a th:href="'/protected/pedido/quitarPizza?id='+${pizza.id}">
+								<i class="fa-solid fa-trash" ></i>
+							</a>
 						</span>
+						<i class="fa-solid fa-pizza-slice icono-pizza"></i>
 						<span th:text="${pizza.nombre}"></span>
-										
-						
+
 						<div  class="fw-lighter">
 								<span th:each="salsa, iterStat : ${pizza.salsas}" th:text="!${iterStat.last} ? ${salsa.nombre} + ', ': ${salsa.nombre} " />
 						</div>
@@ -25,14 +27,14 @@
 						
 						<div class="fw-lighter">
 							<span th:each="topping, iterStat : ${pizza.toppings}" th:text="!${iterStat.last} ? ${topping.nombre} + ', ': ${topping.nombre} " />	
-						</div>											
-						
+						</div>
+
 					</li>
 				</ul>
 			</div>
 		</p>
-		<div>
-			<a th:href="@{/protected/pedido/crear}" class="btn btn-primary">Completar Pedido</a>
+		<div class="row align-items-center">
+					<a th:href="@{/protected/pedido/crear}" class="btn btn-primary">Completar Pedido</a>
 		</div>
 	</div>
 
