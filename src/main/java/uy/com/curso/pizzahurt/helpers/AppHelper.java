@@ -53,7 +53,7 @@ public  class AppHelper {
         pedidoDto.setFecha(strDate);
         pedidoDto.setReceptor(pedido.getNombreReceptor());
         String direccion = pedido.getCalle()+" "+pedido.getNroPuerta();
-        if (!pedido.getApto().isEmpty()){
+        if (pedido.getApto() !=null){
             direccion =direccion+"/"+pedido.getApto();
         }
         direccion = direccion + "(" + pedido.getCiudad() + "-" + pedido.getBarrio() + ")";
@@ -81,6 +81,7 @@ public  class AppHelper {
 
     public static void fillUsuarioFromMedioPago(MedioPagoDto medioPagoDto, Usuario usuario){
         usuario.setEmisor(medioPagoDto.getEmisor());
+        usuario.setNombreTarjeta(medioPagoDto.getNombreTarjeta());
         usuario.setNroTarjeta(medioPagoDto.getNroTarjeta());
         usuario.setFechaVencimiento(medioPagoDto.getFechaVencimiento());
         usuario.setCodigoCVV(medioPagoDto.getCodigoCVV());

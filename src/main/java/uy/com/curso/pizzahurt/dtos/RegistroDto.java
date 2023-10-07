@@ -29,6 +29,9 @@ public class RegistroDto {
 
     @NotBlank
     @NotNull
+    @Pattern(regexp="^(?=.*\\d)(?=.*[A-Z]).{6,9}$",message = "Mínimo 6 y máximo 9 caracteres, Al menos 1 número, " +
+            "Al menos 1 alfabeto en mayúsculas, " +
+            "No se permiten caracteres especiales")
     private String password;
 
     @NotBlank

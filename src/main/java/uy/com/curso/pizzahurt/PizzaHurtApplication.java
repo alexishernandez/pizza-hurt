@@ -62,14 +62,14 @@ public class PizzaHurtApplication {
         return (args -> {
 
             usuarioRepository.save(new Usuario("Jhon Doe","jhondoe@prueba.com","222-2222",
-                    passwordEncoder().encode("password"),true,"Montevideo","Centro","Soriano","1287","101",
+                    passwordEncoder().encode("Password1"),true,"Montevideo","Centro","Soriano","1287","101",
                     11600,"Casi en la esquina", "Visa","Jhon Doe",
-                    "4242424242424242","05/24","212"));
+                    "4336487641383753","05/24","212"));
 
             usuarioRepository.save(new Usuario("Jane Doe","janedoe@prueba.com","222-2222",
-                    passwordEncoder().encode("password1"),true,"Montevideo","Centro","18 de Julio","1287","101",
+                    passwordEncoder().encode("Password2"),true,"Montevideo","Centro","18 de Julio","1287","101",
                     11600,"Casi en la esquina", "Visa","Jane Doe",
-                    "4242424242424242","05/24","212"));
+                    "4469046274639110","05/24","212"));
 
         });
     }
