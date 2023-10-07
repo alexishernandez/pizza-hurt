@@ -67,9 +67,9 @@ public class PizzaHurtApplication {
                     "4336487641383753","05/24","212"));
 
             usuarioRepository.save(new Usuario("Jane Doe","janedoe@prueba.com","222-2222",
-                    passwordEncoder().encode("Password2"),true,"Montevideo","Centro","18 de Julio","1287","101",
+                    passwordEncoder().encode("Password2"),true,"Montevideo","Centro","18 de Julio","1287",null,
                     11600,"Casi en la esquina", "Visa","Jane Doe",
-                    "4469046274639110","05/24","212"));
+                    "4469046274639110","05/24","543"));
 
         });
     }
