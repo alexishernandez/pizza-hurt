@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
 <head th:replace="~{fragments/head :: _head('Perfil del Usuario')}"></head>
 
 <body>
-<nav th:replace="~{fragments/navbar :: _nav}"></nav>
+<nav sec:authorize="isAuthenticated()" th:replace="~{fragments/navbar :: _nav}"></nav>
+<nav sec:authorize="isAnonymous()" th:replace="~{fragments/navbar_external.html :: _nav}"></nav>
 
 <div class="container mt-5">
-
+    <div class="container" >
+        <img th:src="@{/images/error_icon.png}" width="50px" height="50px" />
         <h3> Upss.. ha ocurrido un error</h3>
-        <span th:text="${exception}"></span>
+        <p>Parece haber un problema con la página que solicitó (<span th:text="${path}"></span>).</p>
+        <p th:text="${'El código de error es '+ status+', lo que significa que la página ' + error + '.'}"></p>
+        <a sec:authorize="isAuthenticated()" class="btn btn-primary" href="/protected/home">Volver</a>
+        <a sec:authorize="isAnonymous()" class="btn btn-primary" href="/">Volver al home</a>
+    </div>
 </div>
 
 <footer th:replace="~{fragments/footer:: _footer}"></footer>
