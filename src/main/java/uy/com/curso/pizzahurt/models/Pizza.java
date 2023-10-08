@@ -24,9 +24,7 @@ public class Pizza extends AbstractEntity {
     @NotBlank(message = "El campo nombre no puede ser vacío")
     @Size(min=6, max=40, message = "El nombre debe contener entre {min} y {max} caracteres")
     private String	nombre;
-
-    private Integer	precio;
-
+  
     @NotNull
     @ManyToMany
     private List<Ingrediente> masa = new LinkedList<>();
