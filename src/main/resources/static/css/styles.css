@@ -154,5 +154,11 @@ body > .container {
 }
 
 .icono-pizza {
-	color:red;
+	color: #ff5050;
 }
+
+.select2-selection__choice {
+	background-color: #ff5050;
+	color: white !important;
+}
+

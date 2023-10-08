@@ -10,8 +10,8 @@
 			aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<ul class="navbar-nav">
+		<div class="collapse navbar-collapse px-2" id="navbarNavDropdown">
+			<ul class="navbar-nav px-3 ">
 				<li class="nav-item">
 					<a class="nav-link active" th:href="@{/protected/pizza/crear}">
 						<i class="fas fa-plus-circle"></i> Agregar Pizza a mi Pedido
@@ -21,8 +21,9 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/protected/pedido/list}"> Mis Pedidos <span
-							class="sr-only">(current)</span></a>
+					<a class="nav-link" th:href="@{/protected/pedido/list}"> 
+						<i class="fa-solid fa-list-ul"></i> Mis Pedidos
+						<span class="sr-only">(current)</span></a>
 				</li>
 			</ul>
 
